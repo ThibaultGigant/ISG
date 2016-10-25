@@ -37,7 +37,7 @@ public class GravitySystem : FSystem {
 				masseAttracteur = attracteur.GetComponent<Masse>().mass * Mathf.Pow(10, attracteur.GetComponent<Masse>().exposant);
 				direction = ( attracteur.transform.position - orbiteur.transform.position ).normalized ;
 
-				force = Time.deltaTime * 1e-12f * ((GRAVITY_CNST) * masseAttracteur * masseOrbiteur) / Mathf.Pow (Vector3.Distance (orbiteur.transform.position, attracteur.transform.position), 2f);
+				force = Time.deltaTime * 1e-3f * ((GRAVITY_CNST) * masseAttracteur * masseOrbiteur) / Mathf.Pow (Vector3.Distance (orbiteur.transform.position, attracteur.transform.position), 2f);
 				Debug.Log (force);
 				rb.AddForce (direction * (float) force, ForceMode.Acceleration);
 			}
