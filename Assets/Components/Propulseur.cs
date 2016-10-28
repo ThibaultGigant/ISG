@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 public class Propulseur : MonoBehaviour {
-	// Advice: FYFY component aims to contain only public members (according to Entity-Component-System paradigm).
+
+	public bool isOn;
 	public float carburant;
 	public float currentThrust;
 	public float maxThrust;
