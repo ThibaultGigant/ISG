@@ -24,9 +24,16 @@ public class ApplyBoostSystem : FSystem {
 			Flames flames = go.GetComponent<Flames> ();
 
 			if (prop.isOn && prop.carburant>0){
+				// on applique la force sur la fusée
 				Rigidbody rb = go.GetComponent<Rigidbody>();
-				Vector3 force = prop.currentThrust * prop.orientation.eulerAngles;
+				prop.currentThrust = prop.maxThrust * prop.thrust.value * 0.01f; // on lit le pourcentage de poussée à appliquer 
+				Vector3 force = prop.currentThrust * prop.orientation.eulerAngles * Time.fixedDeltaTime;
 				rb.AddForce (force);
+				// consommation de la propultion
+				float consoReel = prop.currentThrust * prop.consoMax / prop.maxThrust;
+				prop.carburant -= consoReel * Time.fixedDeltaTime;
+				prop.fuelSlider.value = 100 * prop.carburant / prop.carburantMax;
+				//Debug.Log ();
 			}
 			flames.isOn = prop.isOn && prop.carburant > 0;
 		}
