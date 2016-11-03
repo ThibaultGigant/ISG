@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class ApplyBoostSystem : FSystem {
 
+	private float rotationValue = 0;
+
 	private Family propulseurs = FamilyManager.getFamily(new AllOfComponents(typeof(Propulseur), typeof(Masse)));
 
 	// Use this to update member variables when system pause. 
@@ -27,20 +29,31 @@ public class ApplyBoostSystem : FSystem {
 
 			Slider thrustSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[0];
 			Slider fuelSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[1];
+			Slider orientationSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[2];
 
 			if (prop.isOn && prop.carburant>0){
 				// on applique la force sur la fusée
 				Rigidbody rb = go.GetComponent<Rigidbody>();
 				currentThrust = prop.maxThrust * thrustSlider.value * 0.01f; // on lit le pourcentage de poussée à appliquer 
 
-				prop.orientation = go.transform.rotation;
+				//prop.orientation = go.transform.rotation;
 
-				Vector3 force = currentThrust * prop.orientation.eulerAngles * Time.fixedDeltaTime;
+				//Vector3 force = currentThrust * prop.orientation.eulerAngles * Time.fixedDeltaTime;
+				if (orientationSlider.value != rotationValue) {
+					go.transform.Rotate(new Vector3(orientationSlider.value,0,0));
+					rotationValue = orientationSlider.value;
+				}
 
 
-				//Vector3 force = currentThrust * Time.fixedDeltaTime * -go.transform.up;
+				//go.transform.rotation = Quaternion.AngleAxis(orientationSlider.value, Vector3.forward);
+				Vector3 force = currentThrust * Time.fixedDeltaTime * Vector3.up;
 
-				rb.AddForce (force);
+				//force = go.transform.rotation * force;
+				Debug.Log (force);
+
+				//rb.AddForce (force);
+				rb.AddRelativeForce (force);
+
 				// consommation de la propultion
 				float consoReel = currentThrust * prop.consoMax / prop.maxThrust;
 				prop.carburant -= consoReel * Time.fixedDeltaTime;
