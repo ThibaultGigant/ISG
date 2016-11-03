@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using FYFY;
+using UnityEngine.UI;
 
 public class ApplyBoostSystem : FSystem {
 
@@ -17,25 +18,29 @@ public class ApplyBoostSystem : FSystem {
 
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
+		float currentThrust;
 
 		foreach (GameObject go in propulseurs) {
 
 			Propulseur prop = go.GetComponent<Propulseur> ();
 			Flames flames = go.GetComponent<Flames> ();
 
+			Slider thrustSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[0];
+			Slider fuelSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[1];
+
 			if (prop.isOn && prop.carburant>0){
 				// on applique la force sur la fusée
 				Rigidbody rb = go.GetComponent<Rigidbody>();
-				prop.currentThrust = prop.maxThrust * prop.thrust.value * 0.01f; // on lit le pourcentage de poussée à appliquer 
-				Vector3 force = prop.currentThrust * prop.orientation.eulerAngles * Time.fixedDeltaTime;
+				currentThrust = prop.maxThrust * thrustSlider.value * 0.01f; // on lit le pourcentage de poussée à appliquer 
+				Vector3 force = currentThrust * prop.orientation.eulerAngles * Time.fixedDeltaTime;
 				rb.AddForce (force);
 				// consommation de la propultion
-				float consoReel = prop.currentThrust * prop.consoMax / prop.maxThrust;
+				float consoReel = currentThrust * prop.consoMax / prop.maxThrust;
 				prop.carburant -= consoReel * Time.fixedDeltaTime;
-				prop.fuelSlider.value = 100 * prop.carburant / prop.carburantMax;
+				fuelSlider.value = 100 * prop.carburant / prop.carburantMax;
 				//Debug.Log ();
 			}
-			flames.isOn = prop.isOn && prop.carburant > 0;
+			flames.isOn = prop.isOn && prop.carburant > 0 && thrustSlider.value > 0;
 		}
 	}
 }
