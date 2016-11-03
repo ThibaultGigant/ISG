@@ -32,7 +32,14 @@ public class ApplyBoostSystem : FSystem {
 				// on applique la force sur la fusée
 				Rigidbody rb = go.GetComponent<Rigidbody>();
 				currentThrust = prop.maxThrust * thrustSlider.value * 0.01f; // on lit le pourcentage de poussée à appliquer 
+
+				prop.orientation = go.transform.rotation;
+
 				Vector3 force = currentThrust * prop.orientation.eulerAngles * Time.fixedDeltaTime;
+
+
+				//Vector3 force = currentThrust * Time.fixedDeltaTime * -go.transform.up;
+
 				rb.AddForce (force);
 				// consommation de la propultion
 				float consoReel = currentThrust * prop.consoMax / prop.maxThrust;

@@ -30,7 +30,8 @@ public class Propulse : MonoBehaviour {
 
 			if (joint == null) {
 				toEmpty.mass -= consomption * Time.deltaTime;
-				rb.AddForce (300, thrust*Time.deltaTime, 0);
+				//rb.AddForce (300, thrust*Time.deltaTime, 0);
+				rb.AddForce (0, thrust*Time.deltaTime, 0);
 			} else {
 				parentRb.AddForce (0, thrust*Time.deltaTime, 0);
 			}
