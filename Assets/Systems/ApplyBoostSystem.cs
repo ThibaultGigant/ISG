@@ -4,63 +4,36 @@ using UnityEngine.UI;
 
 public class ApplyBoostSystem : FSystem {
 
-	private float rotationValue = 0;
+	private Family propulseurs = FamilyManager.getFamily(new AllOfComponents(typeof(Propulseur),typeof(Masse)));
 
-	private Family propulseurs = FamilyManager.getFamily(new AllOfComponents(typeof(Propulseur), typeof(Masse)));
-
-	// Use this to update member variables when system pause. 
-	// Advice: avoid to update your families inside this function.
 	protected override void onPause(int currentFrame) {
 	}
-
-	// Use this to update member variables when system resume.
-	// Advice: avoid to update your families inside this function.
+		
 	protected override void onResume(int currentFrame){
 	}
 
-	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
-		float currentThrust;
-
+		 
 		foreach (GameObject go in propulseurs) {
-
+			
 			Propulseur prop = go.GetComponent<Propulseur> ();
 			Flames flames = go.GetComponent<Flames> ();
+			Masse masse = prop.GetComponent<Masse> ();
 
-			Slider thrustSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[0];
-			Slider fuelSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[1];
-			Slider orientationSlider = (Slider) prop.sliders.GetComponentsInChildren<Slider>()[2];
+			if (prop.isOn && prop.currentFuel > 0f) {
 
-			if (prop.isOn && prop.carburant>0){
-				// on applique la force sur la fusée
-				Rigidbody rb = go.GetComponent<Rigidbody>();
-				currentThrust = prop.maxThrust * thrustSlider.value * 0.01f; // on lit le pourcentage de poussée à appliquer 
+				Vector3 force = prop.target.transform.up * prop.currentThrust * 1000f * 50f; //On est en tonne
+				Rigidbody rb = prop.target.GetComponent<Rigidbody> ();
+				rb.AddForce (force);
 
-				//prop.orientation = go.transform.rotation;
-
-				//Vector3 force = currentThrust * prop.orientation.eulerAngles * Time.fixedDeltaTime;
-				if (orientationSlider.value != rotationValue) {
-					go.transform.Rotate(new Vector3(orientationSlider.value,0,0));
-					rotationValue = orientationSlider.value;
-				}
-
-
-				//go.transform.rotation = Quaternion.AngleAxis(orientationSlider.value, Vector3.forward);
-				Vector3 force = currentThrust * Time.fixedDeltaTime * Vector3.up;
-
-				//force = go.transform.rotation * force;
-				Debug.Log (force);
-
-				//rb.AddForce (force);
-				rb.AddRelativeForce (force);
-
-				// consommation de la propultion
-				float consoReel = currentThrust * prop.consoMax / prop.maxThrust;
-				prop.carburant -= consoReel * Time.fixedDeltaTime;
-				fuelSlider.value = 100 * prop.carburant / prop.carburantMax;
-				//Debug.Log ();
+				prop.currentFuel = Mathf.Max(prop.currentFuel - prop.currentThrust / prop.maxThrust * prop.consumption * Time.fixedDeltaTime, 0f);
 			}
-			flames.isOn = prop.isOn && prop.carburant > 0 && thrustSlider.value > 0;
+
+			masse.mass = prop.emptyMass + prop.currentFuel;
+
+			if (flames != null) {
+				flames.isOn = prop.isOn && prop.currentFuel > 0;
+			}
 		}
 	}
 }

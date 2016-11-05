@@ -3,7 +3,7 @@ using FYFY;
 
 public class GravitySystem : FSystem {
 	// Récupération des familles sur lesquelles agit le système
-	private Family orbiteurs = FamilyManager.getFamily(new AllOfComponents(typeof(Orbiteur), typeof(Masse)));
+	private Family orbiteurs = FamilyManager.getFamily(new AllOfComponents(typeof(Rigidbody)));
 	private Family attracteurs = FamilyManager.getFamily(new AllOfComponents(typeof(Attracteur), typeof(Masse)));
 
 	// Constante gravitationnelle pour les calculs des forces
@@ -30,15 +30,13 @@ public class GravitySystem : FSystem {
 		// Pour chaque orbiteur
 	
 		foreach (GameObject orbiteur in orbiteurs) {
-			rb = orbiteur.GetComponent<Orbiteur>().target.GetComponent<Rigidbody>();
-			Masse componentMasseOrbiteur = orbiteur.GetComponent<Masse> ();
-			masseOrbiteur = componentMasseOrbiteur.mass * Mathf.Pow(10, componentMasseOrbiteur.exposant);
+			rb = orbiteur.GetComponent<Rigidbody> ();
+			masseOrbiteur = rb.mass;
 			// On lui applique la force de gravité de chaque attracteur
 			foreach (GameObject attracteur in attracteurs) {
 				masseAttracteur = attracteur.GetComponent<Masse>().mass * Mathf.Pow(10, attracteur.GetComponent<Masse>().exposant);
 				direction = ( attracteur.transform.position - orbiteur.transform.position ).normalized ;
 				force = 50 * Time.fixedDeltaTime * ((GRAVITY_CNST) * masseAttracteur * masseOrbiteur) / Mathf.Pow (Vector3.Distance (orbiteur.transform.position, attracteur.transform.position), 2f);
-				//Debug.Log (force);
 				rb.mass = (float) masseOrbiteur;
 				rb.AddForce (direction * (float) force);
 			}

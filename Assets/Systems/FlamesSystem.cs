@@ -22,6 +22,7 @@ public class FlamesSystem : FSystem {
 			Flames f = go.GetComponent<Flames> ();
 			foreach (GameObject f2 in f.flames){
 				f2.SetActive (f.isOn);
+
 			}
 		}
 
