@@ -28,7 +28,7 @@ public class ThrustHUDSystem : FSystem {
 			Propulseur prop = go.GetComponent<ThrustHUDComponent> ().propulseur;
 			currentThrust = prop.maxThrust * slider.value / 100;
 			prop.currentThrust = currentThrust;
-			text.text = "Thrust: " + currentThrust/prop.maxThrust * 100 +"%";
+			text.text = "Thrust: " + slider.value +"%";
 		}
 	}
 }

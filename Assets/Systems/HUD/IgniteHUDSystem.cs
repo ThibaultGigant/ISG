@@ -20,7 +20,9 @@ public class IgniteHUDSystem : FSystem {
 		foreach (GameObject go in igniteButtons) {
 			Slider slider = go.GetComponentInChildren<Slider> ();
 			if (slider.value == 1) {
-				go.GetComponent<IgniteHUDComponent> ().propulseur.isOn = true;
+				foreach (Propulseur prop in go.GetComponent<IgniteHUDComponent>().propulseurs) {
+					prop.isOn = true;
+				}
 				slider.interactable = false;
 				GameObjectManager.removeComponent (go.GetComponent<IgniteHUDComponent> ());
 			}

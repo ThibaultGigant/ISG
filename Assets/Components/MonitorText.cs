@@ -12,6 +12,10 @@ public class MonitorText : MonoBehaviour {
 	public Vector3 lastPosition;
 	public float lastSpeed;
 
+	public int frameCount = 0;
+
+	public int fps = 10;
+
 	//public FixedSizedQueue queue;
 
 }

@@ -20,7 +20,9 @@ public class JettisonHUDSystem : FSystem {
 		foreach (GameObject go in jettisonButtons) {
 			Slider slider = go.GetComponentInChildren<Slider> ();
 			if (slider.value == 1) {
-				go.GetComponent<JettisonHUDComponent> ().largable.toDrop = true;
+				foreach (Largable largable in go.GetComponent<JettisonHUDComponent> ().largables) {
+					largable.toDrop = true;
+				}
 				slider.interactable = false;
 				GameObjectManager.removeComponent (go.GetComponent<JettisonHUDComponent> ());
 			}

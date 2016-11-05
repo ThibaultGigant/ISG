@@ -22,9 +22,15 @@ public class FuelHUDSystem : FSystem {
 			Slider slider = go.GetComponentInChildren<Slider> ();
 			Text text = go.GetComponentInChildren<Text> ();
 
-			Propulseur prop = go.GetComponent<FuelHUDComponent> ().propulseur;
-			slider.value = prop.currentFuel / prop.initialFuel * 100;
-			text.text = "Fuel: " + slider.value + "%";
+			Propulseur[] props = go.GetComponent<FuelHUDComponent> ().propulseurs;
+			float totalFuel = 0f;
+			float totalInitialFuel = 0f;
+			foreach (Propulseur prop in props) {
+				totalFuel += prop.currentFuel;
+				totalInitialFuel += prop.initialFuel;
+			}
+			slider.value = totalFuel / totalInitialFuel * 100;
+			text.text = "Fuel: " + (int)slider.value + "%";
 		}
 	}
 }
