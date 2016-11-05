@@ -22,9 +22,13 @@ public class ThrustHUDSystem : FSystem {
 
 		// Mise à jour de la poussée pour tous les propulseurs qui peuvent être réglés
 		foreach (GameObject go in thrusts) {
+			Slider slider = go.GetComponentInChildren<Slider> ();
+			Text text = go.GetComponentInChildren<Text> ();
+
 			Propulseur prop = go.GetComponent<ThrustHUDComponent> ().propulseur;
-			currentThrust = prop.maxThrust * ((Slider)go).value / 100;
+			currentThrust = prop.maxThrust * slider.value / 100;
 			prop.currentThrust = currentThrust;
+			text.text = "Thrust: " + currentThrust/prop.maxThrust * 100 +"%";
 		}
 	}
 }

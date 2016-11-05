@@ -18,10 +18,11 @@ public class JettisonHUDSystem : FSystem {
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
 		foreach (GameObject go in jettisonButtons) {
-			if (((Slider)go).value == 1) {
+			Slider slider = go.GetComponentInChildren<Slider> ();
+			if (slider.value == 1) {
 				go.GetComponent<JettisonHUDComponent> ().largable.toDrop = true;
-				((Slider)go).interactable = false;
-				GameObjectManager.removeComponent (JettisonHUDComponent);
+				slider.interactable = false;
+				GameObjectManager.removeComponent (go.GetComponent<JettisonHUDComponent> ());
 			}
 		}
 

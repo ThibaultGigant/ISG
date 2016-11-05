@@ -18,9 +18,11 @@ public class OnOffHUDSystem : FSystem {
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
 		foreach (GameObject go in onOffButtons) {
-			if (((Slider)go).value == 1) {
+			Slider slider = go.GetComponentInChildren<Slider> ();
+			if (slider.value == 1)
 				go.GetComponent<ToggleHUDComponent> ().propulseur.isOn = true;
-			}
+			else
+				go.GetComponent<ToggleHUDComponent> ().propulseur.isOn = false;
 		}
 
 	}

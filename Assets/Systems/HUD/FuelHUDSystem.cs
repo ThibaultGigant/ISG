@@ -19,8 +19,12 @@ public class FuelHUDSystem : FSystem {
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
 		foreach (GameObject go in fuelSliders) {
+			Slider slider = go.GetComponentInChildren<Slider> ();
+			Text text = go.GetComponentInChildren<Text> ();
+
 			Propulseur prop = go.GetComponent<FuelHUDComponent> ().propulseur;
-			((Slider)go).value = prop.currentFuel / prop.initialFuel * 100;
+			slider.value = prop.currentFuel / prop.initialFuel * 100;
+			text.text = "Fuel: " + slider.value + "%";
 		}
 	}
 }

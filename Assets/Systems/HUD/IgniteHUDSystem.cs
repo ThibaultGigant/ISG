@@ -18,10 +18,11 @@ public class IgniteHUDSystem : FSystem {
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
 		foreach (GameObject go in igniteButtons) {
-			if (((Slider)go).value == 1) {
+			Slider slider = go.GetComponentInChildren<Slider> ();
+			if (slider.value == 1) {
 				go.GetComponent<IgniteHUDComponent> ().propulseur.isOn = true;
-				((Slider)go).interactable = false;
-				GameObjectManager.removeComponent (IgniteHUDComponent);
+				slider.interactable = false;
+				GameObjectManager.removeComponent (go.GetComponent<IgniteHUDComponent> ());
 			}
 		}
 
