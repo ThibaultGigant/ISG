@@ -30,10 +30,11 @@ public class MonitorTextSystem : FSystem {
 
 			m.frameCount += 1;
 
-
-
-			float speed = Vector3.Distance (m.target.transform.position, m.lastPosition) / Time.deltaTime * 3.6f;
-			float g = Time.deltaTime * (speed - m.lastSpeed) * 3.6f * 9.81f * 2f;
+			float speed = m.lastSpeed;
+			if (Vector3.Distance (m.target.transform.position, m.lastPosition) > 0) {
+				speed = Vector3.Distance (m.target.transform.position, m.lastPosition) * 3.6f / Time.deltaTime;
+			}
+			float g = Time.deltaTime * (speed - m.lastSpeed) * 3.6f * 9.81f * 2f; // Calcul douteux
 			float alt = Vector3.Distance (new Vector3 (0f, -6371000, 0f), m.target.transform.position);
 			alt -= 6371000;
 			m.lastPosition = m.target.transform.position;
