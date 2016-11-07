@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &163286
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,10 +72,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188146}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 9, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children: []
   m_Father: {fileID: 412958}
   m_RootOrder: 0
@@ -210,11 +210,12 @@ MonoBehaviour:
   AudioSource: {fileID: 8256470}
   StartTime: 0.25
   StopTime: 1
-  Duration: 1
+  Duration: Infinity
   ForceAmount: 0
   ForceRadius: 0
   IsProjectile: 1
-  ManualParticleSystems: []
+  ManualParticleSystems:
+  - {fileID: 19810244}
 --- !u!198 &19810244
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -264,8 +265,8 @@ ParticleSystem:
   playOnAwake: 0
   moveWithTransform: 1
   autoRandomSeed: 1
-  scalingMode: 2
-  randomSeed: 0
+  scalingMode: 0
+  randomSeed: -147241127
   InitialModule:
     serializedVersion: 2
     enabled: 1

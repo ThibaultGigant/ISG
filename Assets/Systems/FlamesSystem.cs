@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using FYFY;
+using DigitalRuby.PyroParticles;
 
 public class FlamesSystem : FSystem {
 	// Use this to update member variables when system pause. 
@@ -21,7 +22,20 @@ public class FlamesSystem : FSystem {
 		foreach(GameObject go in flames){
 			Flames f = go.GetComponent<Flames> ();
 			foreach (GameObject f2 in f.flames){
-				f2.SetActive (f.isOn);
+				if (f2 != null) {
+					FireBaseScript fbs = f2.GetComponent<FireBaseScript> ();
+					if (fbs.ManualParticleSystems.Length > 0) {
+						if (f.isOn) {
+							foreach (ParticleSystem p in fbs.ManualParticleSystems) {
+								p.Play ();
+							}
+						} else {
+							foreach (ParticleSystem p in fbs.ManualParticleSystems) {
+								p.Stop ();
+							}
+						}
+					}
+				}
 
 			}
 		}
