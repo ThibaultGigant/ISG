@@ -35,8 +35,9 @@ public class GravitySystem : FSystem {
 			// On lui applique la force de gravité de chaque attracteur
 			foreach (GameObject attracteur in attracteurs) {
 				masseAttracteur = attracteur.GetComponent<Masse>().mass * Mathf.Pow(10, attracteur.GetComponent<Masse>().exposant);
-				direction = ( attracteur.transform.position - orbiteur.transform.position ).normalized ;
-				force = 50 * Time.fixedDeltaTime * ((GRAVITY_CNST) * masseAttracteur * masseOrbiteur) / Mathf.Pow (Vector3.Distance (orbiteur.transform.position, attracteur.transform.position), 2f);
+				direction = ( attracteur.transform.position - orbiteur.transform.position ).normalized ; // 50 * Time.fixedDeltaTime *
+				force =  ((GRAVITY_CNST) * masseAttracteur * masseOrbiteur) / Mathf.Pow (Vector3.Distance (orbiteur.transform.position, attracteur.transform.position), 2f);
+				force *= .5555555f;
 				rb.mass = (float) masseOrbiteur;
 				rb.AddForce (direction * (float) force);
 			}
