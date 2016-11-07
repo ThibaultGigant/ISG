@@ -414,7 +414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8461838e5cb4c4bb0dd5be31554947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propulseur: {fileID: 0}
+  propulseurs:
+  - {fileID: 0}
 --- !u!114 &114000010666539218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,8 +671,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224000010717286126}
   m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -905,6 +906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62d0907304024c73803cc65b24239e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propulseur: {fileID: 0}
 --- !u!114 &114000014175302220
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -186,7 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93858db47dfb44f62b843e2bb760758e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propulseur: {fileID: 0}
+  largables:
+  - {fileID: 0}
 --- !u!114 &114000011202901498
 MonoBehaviour:
   m_ObjectHideFlags: 1
