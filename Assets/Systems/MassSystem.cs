@@ -25,7 +25,7 @@ public class MassSystem : FSystem {
 			Masse mass = go.GetComponent<Masse> ();
 			if (mass.target != null) {
 				Rigidbody rb = mass.target.GetComponent<Rigidbody> ();
-				Masse m2 = mass.target.GetComponent<Masse> ();
+				//Masse m2 = mass.target.GetComponent<Masse> ();
 				rb.mass += mass.mass * Mathf.Pow (10, mass.exposant);
 			}
 		}
