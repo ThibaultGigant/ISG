@@ -14,6 +14,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float MaximumX = 90F;
         public bool smooth;
         public float smoothTime = 5f;
+
+		public float maxFOV = 80f;
+		public float minFOV = 8f;
+
         public bool lockCursor = true;
 
 
@@ -28,7 +32,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        public void LookRotation(Transform character, Transform camera)
+        public void LookRotation(Transform character, Camera camera, GameObject target)
         {
 
 			if (Input.GetKeyDown (KeyCode.C)){
@@ -51,14 +55,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 character.localRotation = Quaternion.Slerp (character.localRotation, m_CharacterTargetRot,
                     smoothTime * Time.deltaTime);
-                camera.localRotation = Quaternion.Slerp (camera.localRotation, m_CameraTargetRot,
+                camera.transform.localRotation = Quaternion.Slerp (camera.transform.localRotation, m_CameraTargetRot,
                     smoothTime * Time.deltaTime);
             }
             else
             {
                 character.localRotation = m_CharacterTargetRot;
-                camera.localRotation = m_CameraTargetRot;
+                camera.transform.localRotation = m_CameraTargetRot;
             }
+
+
+
+			camera.fieldOfView += 2 * Input.GetAxis ("Mouse ScrollWheel");
+
+			camera.fieldOfView = Mathf.Min (Mathf.Max (camera.fieldOfView, minFOV), maxFOV);
 
             UpdateCursorLock();
         }
@@ -66,8 +76,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void SetCursorLock(bool value)
         {
             lockCursor = value;
-            if(!lockCursor)
-            {//we force unlock the cursor if the user disable the cursor locking helper
+            if(!lockCursor){
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
@@ -75,27 +84,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void UpdateCursorLock()
         {
-            //if the user set "lockCursor" we check & properly lock the cursos
-         //   if (lockCursor)
                 InternalLockUpdate();
         }
 
         private void InternalLockUpdate()
         {
-            /*
-            if(Input.GetKeyUp(KeyCode.Escape))
-            {
-                m_cursorIsLocked = false;
-            }
-            else if(Input.GetMouseButtonUp(0))
-            {
-                m_cursorIsLocked = true;
-            }
-			*/
-
-
-				
-
             if (m_cursorIsLocked)
             {
                 Cursor.lockState = CursorLockMode.Locked;

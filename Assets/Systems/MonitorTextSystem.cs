@@ -7,11 +7,23 @@ public class MonitorTextSystem : FSystem {
 
 	private Family monitors = FamilyManager.getFamily(new AllOfComponents(typeof(MonitorText)));
 
+	public MonitorTextSystem(){
+		foreach (GameObject go in monitors) {
+			MonitorText m = go.GetComponent<MonitorText> ();
+			m.timer = 0f;
+			m.frameCount = 0;
+			m.accelerationQueue = new LimitedQueue<float> (m.memory);
+			m.speedQueue = new LimitedQueue<float> (m.memory);
+			m.messageQueue = new LimitedQueue<string> (4);
+		}
+
+	}
+
+
 	protected override void onPause(int currentFrame) {
 	}
 
-	// Use this to update member variables when system resume.
-	// Advice: avoid to update your families inside this function.
+
 	protected override void onResume(int currentFrame){
 
 		foreach (GameObject go in monitors){
@@ -26,37 +38,60 @@ public class MonitorTextSystem : FSystem {
 		foreach (GameObject go in monitors) {
 			MonitorText m = go.GetComponent<MonitorText> ();
 			Text text = go.GetComponent<Text> ();
+
 			m.timer += Time.fixedDeltaTime;
 			m.frameCount++;
 
-			float speed = m.lastSpeed;
-			//if (Vector3.Distance (m.target.transform.position, m.lastPosition) > 0) {
-			speed = Vector3.Distance (m.target.transform.position, m.lastPosition) * 3.6f / Time.fixedDeltaTime;
-			//}
-
+			float speed = Vector3.Distance (m.target.transform.position, m.lastPosition) * 3.6f / Time.fixedDeltaTime;
 			float g = (speed - m.lastSpeed)  / Time.fixedDeltaTime / 9.81f / 2f;
-			string strG = String.Format("{0:0.00}", g);
+
+
 
 			float alt = Vector3.Distance (new Vector3 (0f, -6371000, 0f), m.target.transform.position);
 			alt -= 6371000;
 			alt /= 1000f;
 
-			string strAlt = String.Format("{0:0.000}", alt);
+
+
 
 			m.lastPosition = m.target.transform.position;
 			m.lastSpeed = speed;
 
+			m.accelerationQueue.Enqueue (g);
+			m.speedQueue.Enqueue (speed);
+
 
 			if (m.frameCount == m.fps) {
+
+
+				string strG = String.Format("{0:0.00}", getQueueMean (m.accelerationQueue));
+				string strAlt = String.Format("{0:0.000}", alt);
+
 				string tex = "T : + " + (int)m.timer + "\n";
-				tex += "Speed : " + (int)speed + " km/h" + "\n"; 
+				tex += "Speed : " + (int)getQueueMean (m.speedQueue) + " km/h" + "\n"; 
 				tex += "Acceleration : " + strG + " G" + "\n";
 				tex += "Altitude : " + strAlt + " km" + "\n";
+
+				foreach(string str in m.messageQueue){
+					tex+="-: "+str+"\n";
+				}
 
 				text.text = tex;
 				m.frameCount = 0;
 			}
 		}
 
+	}
+
+	public float getQueueMean(LimitedQueue<float> q){
+		if (q.Count == 0)
+			return 0;
+		
+		float res = 0f;
+		foreach (float o in q){
+			res += (float)o;
+		}
+
+		return res /= q.Count;
 	}
 }

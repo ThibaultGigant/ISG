@@ -31,7 +31,6 @@ public class CameraFollow : MonoBehaviour {
 
 	private void RotateView()
 	{
-		Debug.Log (m_MouseLook);
-		m_MouseLook.LookRotation (transform, m_Camera.transform);
+		m_MouseLook.LookRotation (transform, m_Camera, toFollow);
 	}
 }
