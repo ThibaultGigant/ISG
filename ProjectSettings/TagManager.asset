@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FuelSlider
   - ThrustSlider
+  - Fire
+  - Tank
   layers:
   - Default
   - TransparentFX
