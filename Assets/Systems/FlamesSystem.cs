@@ -27,6 +27,9 @@ public class FlamesSystem : FSystem {
 					if (fbs.ManualParticleSystems.Length > 0) {
 						if (f.isOn) {
 							foreach (ParticleSystem p in fbs.ManualParticleSystems) {
+								Propulseur prop = go.GetComponent<Propulseur> ();
+								float sizeFactor = prop.currentThrust / prop.maxThrust;
+								p.startSize = 3 * sizeFactor;
 								p.Play ();
 							}
 						} else {
