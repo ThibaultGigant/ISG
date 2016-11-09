@@ -23,7 +23,11 @@ public class DropSystem : FSystem {
 			{
 				Rigidbody rb = go.GetComponent<Rigidbody>();
 				if (rb != null) {
-					rb.velocity = go.transform.parent.GetComponent<Rigidbody> ().velocity;
+					/*float parentMass = go.transform.parent.GetComponent<Rigidbody> ().mass;
+					float goMass = rb.mass;
+					float factor = parentMass / goMass;*/
+					rb.velocity = go.transform.parent.GetComponentInParent<Rigidbody> ().velocity;
+
 					// Ajout d'une force sur le côté pour éloigner l'objet
 					rb.AddForce (go.transform.localPosition.normalized * 1e3f);
 					rb.AddTorque (new Vector3 (0, 0, -go.transform.localPosition.x));
@@ -34,15 +38,13 @@ public class DropSystem : FSystem {
 					// Suppression composant largable car déjà largué
 					GameObjectManager.removeComponent<Largable> (go);
 				} else {
-					// Création d'un RigidBody à lui ajouter
-					GameObjectManager.addComponent<Rigidbody> (go);
 
-					// Mise à jour des target des components
-					go.GetComponent<Masse> ().target = go;
-					Propulseur prop = go.GetComponent<Propulseur> ();
-					if (prop != null) {
-						prop.target = go;
+					Propulseur[] propfils = go.GetComponentsInChildren<Propulseur> ();
+					foreach (Propulseur p in propfils)
+					{
+						prepareToJettison (go, p.gameObject);
 					}
+
 
 					// Test pour désactiver le Tank
 					if (go.CompareTag ("Tank")) {
@@ -51,6 +53,24 @@ public class DropSystem : FSystem {
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * Rajoute le RigidBody au parent et met les targets des propulseurs à jour
+	 */
+	void prepareToJettison(GameObject father, GameObject dropped)
+	{
+		// Création d'un RigidBody à lui ajouter
+		if (dropped.GetComponent<Rigidbody> () == null && dropped == father) {
+			GameObjectManager.addComponent<Rigidbody> (dropped);
+		}
+
+		// Mise à jour des target des components
+		dropped.GetComponent<Masse> ().target = father;
+		Propulseur prop = dropped.GetComponent<Propulseur> ();
+		if (prop != null) {
+			prop.target = father;
 		}
 	}
 }
