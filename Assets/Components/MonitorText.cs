@@ -21,6 +21,8 @@ public class MonitorText : MonoBehaviour {
 	public LimitedQueue<float> speedQueue;
 	public LimitedQueue<string> messageQueue;
 
+	public float scale; // echelle utilisee pour le monde
+
 
 }
 

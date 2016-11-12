@@ -42,12 +42,12 @@ public class MonitorTextSystem : FSystem {
 			m.timer += Time.fixedDeltaTime;
 			m.frameCount++;
 
-			float speed = Vector3.Distance (m.target.transform.position, m.lastPosition) * 3.6f / Time.fixedDeltaTime;
+			float speed = Vector3.Distance (m.target.transform.position, m.lastPosition) * m.scale * 3.6f / Time.fixedDeltaTime;
 			float g = (speed - m.lastSpeed)  / Time.fixedDeltaTime / 9.81f / 2f;
 
 
 
-			float alt = Vector3.Distance (new Vector3 (0f, -6371000, 0f), m.target.transform.position);
+			float alt = Vector3.Distance (Vector3.zero, m.target.transform.position) * m.scale;
 			alt -= 6371000;
 			alt /= 1000f;
 
