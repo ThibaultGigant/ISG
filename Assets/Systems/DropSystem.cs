@@ -46,8 +46,10 @@ public class DropSystem : FSystem {
 					}
 
 
-					// Test pour désactiver le Tank
+					// Désactivation du Tank
 					if (go.CompareTag ("Tank")) {
+						Debug.Log ("This is it");
+						go.GetComponent<Flames> ().isOn = false;
 						GameObjectManager.removeComponent<Flames> (go);
 						GameObjectManager.removeComponent<Propulseur> (go);
 					}

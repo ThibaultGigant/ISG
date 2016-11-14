@@ -1121,7 +1121,7 @@ GameObject:
   - 136: {fileID: 136000012196132114}
   m_Layer: 0
   m_Name: Tank
-  m_TagString: Untagged
+  m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5713,7 +5713,7 @@ MonoBehaviour:
   lastPosition: {x: 0, y: 0, z: 0}
   lastSpeed: 0
   frameCount: 0
-  fps: 5
+  fps: 20
   scale: 100
 --- !u!114 &114000012089729962
 MonoBehaviour:
