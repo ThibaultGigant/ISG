@@ -975,6 +975,16 @@ Prefab:
       propertyPath: m_AnchorMax.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012054975882, guid: 60d8feb7917e54d5e8860981ee68a0f5,
+        type: 2}
+      propertyPath: memory
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012054975882, guid: 60d8feb7917e54d5e8860981ee68a0f5,
+        type: 2}
+      propertyPath: fps
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60d8feb7917e54d5e8860981ee68a0f5, type: 2}
   m_IsPrefabParent: 0
