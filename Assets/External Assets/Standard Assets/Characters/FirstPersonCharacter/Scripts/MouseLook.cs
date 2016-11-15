@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public float maxFOV = 80f;
 		public float minFOV = 8f;
 
-		public float speed = 0.1f;
+		public float speed = 0.01f;
 
 		public bool lockCursor = true;
 
@@ -31,16 +31,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		bool needReset;
 		bool tracking = false;
 
+		int memory = 30;
+		LimitedQueue<Vector3> queue;
+
 		public void Init (Transform character, Transform camera)
 		{
 			m_CharacterTargetRot = character.localRotation;
 			m_CameraTargetRot = camera.localRotation;
 			needReset = false;
+
+			if (queue == null) {
+				queue = new LimitedQueue<Vector3> (memory);
+			}
 		}
+
 
 
 		public void LookRotation (Transform character, Camera camera, Transform target, Vector3 up)
 		{
+
+			queue.Enqueue (target.transform.position);
 
 			camera.fieldOfView += 2 * Input.GetAxis ("Mouse ScrollWheel");
 			camera.fieldOfView = Mathf.Min (Mathf.Max (camera.fieldOfView, minFOV), maxFOV);
@@ -53,7 +63,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			}
 
 			if (tracking) {
-				camera.transform.rotation = Quaternion.Lerp (camera.transform.rotation, Quaternion.LookRotation (target.transform.position - camera.transform.position), speed);
+				
+				float lerpSpeed = Mathf.Max (Mathf.Min (speed / Time.deltaTime, speed), 0.001f);
+
+				Vector3 pos = Vector3.zero;
+
+				foreach (Vector3 v3 in queue) {
+					pos += v3;
+				}
+				pos /= queue.Count;
+				Vector3 z = Vector3.zero;
+
+				pos = Vector3.SmoothDamp (camera.transform.position, target.transform.position, ref z, .3f / Time.deltaTime);
+			
+				//
+				//camera.transform.rotation = Quaternion.Lerp (camera.transform.rotation, Quaternion.LookRotation (target.transform.position - camera.transform.position), lerpSpeed);
+				character.transform.LookAt (target);
 				return;
 			}
 

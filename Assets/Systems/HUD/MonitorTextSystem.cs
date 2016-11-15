@@ -54,7 +54,7 @@ public class MonitorTextSystem : FSystem
 
 
 			// Calcul de la vitesse générale
-			float speed = Vector3.Distance (m.target.transform.position, m.lastPosition) * 3.6f / Time.fixedDeltaTime;
+			float speed = 10 * Vector3.Distance (m.target.transform.position, m.lastPosition) * 3.6f / Time.fixedDeltaTime;
 			float g = (speed - m.lastSpeed) / Time.fixedDeltaTime / 9.81f / 2f;
 
 			// Calcul de l'altitude
