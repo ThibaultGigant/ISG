@@ -120,7 +120,7 @@ Material:
     m_Floats:
     - first:
         name: _AtmosFalloff
-      second: 14
+      second: 0.1
     - first:
         name: _BumpScale
       second: 1
