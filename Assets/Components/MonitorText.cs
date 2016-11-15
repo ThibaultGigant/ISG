@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class MonitorText : MonoBehaviour {
+public class MonitorText : MonoBehaviour
+{
 
 	public int memory = 10;
 
@@ -14,15 +15,17 @@ public class MonitorText : MonoBehaviour {
 	public GameObject target;
 	public Vector3 lastPosition;
 	public float lastSpeed;
+	public float lastGroundSpeed;
 	public int frameCount;
 	public int fps = 10;
 
 	public LimitedQueue<float> accelerationQueue;
 	public LimitedQueue<float> speedQueue;
-	public LimitedQueue<Vector3> groundSpeedQueue;
+	public LimitedQueue<float> groundSpeedQueue;
 	public LimitedQueue<string> messageQueue;
 
-	public float scale; // echelle utilisee pour le monde
+	public float scale;
+	// echelle utilisee pour le monde
 
 
 }
