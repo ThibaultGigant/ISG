@@ -26,9 +26,9 @@ public class Capcom : MonoBehaviour {
 		timer += Time.deltaTime;
 		if (timer > 2f) {
 			if (q.Count > 0) {
-			m.messageQueue.Enqueue (q.Dequeue ());
-			timer = 0f;
-		}
+				m.messageQueue.Enqueue (q.Dequeue ());
+				timer = 0f;
+			}
 
 		}
 			
