@@ -24,7 +24,7 @@ public class ApplyBoostSystem : FSystem {
 
 				Vector3 force = prop.target.transform.up * prop.currentThrust * 1000f * 9.81f;//* 50f; //On est en tonne donc *1000, et physique Unity donc *50
 				Rigidbody rb = prop.target.GetComponent<Rigidbody> ();
-				rb.AddForce (force);
+				rb.AddForce (force / 10);
 				prop.currentFuel = Mathf.Max(prop.currentFuel - prop.currentThrust / prop.maxThrust * prop.consumption * Time.fixedDeltaTime, 0f);
 			}
 
