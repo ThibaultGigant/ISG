@@ -8,6 +8,8 @@ TagManager:
   - ThrustSlider
   - Fire
   - Tank
+  - TrajectoryGenerator
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
