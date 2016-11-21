@@ -18,8 +18,8 @@ public class TrackingPanelSystem : FSystem
 
 			Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
 			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
-			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image>();
-			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image>();
+			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image> ();
+			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image> ();
 
 			tp.lastVelocity = Vector3.zero;
 			tp.lastCheckPointIndex = 0;
@@ -28,8 +28,8 @@ public class TrackingPanelSystem : FSystem
 
 			sliderG.maxValue = tp.GRange;
 
-			sliderOrientaion.minValue = -tp.rotRange/2;
-			sliderOrientaion.maxValue = tp.rotRange/2;
+			sliderOrientaion.minValue = -tp.rotRange / 2;
+			sliderOrientaion.maxValue = tp.rotRange / 2;
 
 			GAlert.enabled = false;
 			RotAlert.enabled = false;
@@ -46,8 +46,8 @@ public class TrackingPanelSystem : FSystem
 			Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
 			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
 
-			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image>();
-			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image>();
+			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image> ();
+			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image> ();
 
 			GameObject rocket = tp.target;
 
@@ -76,40 +76,40 @@ public class TrackingPanelSystem : FSystem
 			tp.lastCheckPointIndex = bestIndex;
 			Vector3 lastVelocity = tp.target.GetComponent<Rigidbody> ().velocity;
 
-			float G = (lastVelocity - tp.lastVelocity).magnitude * 9.81f / Time.timeScale;
+			float G = (lastVelocity - tp.lastVelocity).magnitude * 9.81f / Time.timeScale * 10f; // 10 pour la mise à l'echelle
 
 			tp.GQueue.Enqueue (G);
 			sliderG.value = getQueueMean (tp.GQueue);
 			tp.lastVelocity = lastVelocity;
 			sliderOrientaion.value = tp.target.transform.rotation.x * 180 - tp.trajectory.checkPoints [bestIndex].orientation;
 
-			if(tp.growing){
+			if (tp.growing) {
 				tp.alphaAlertVal += tp.blinkingSpeed * Time.deltaTime / Time.timeScale;
-				if (tp.alphaAlertVal > 1f){
+				if (tp.alphaAlertVal > 1f) {
 					tp.growing = false;
 				}
-			}else{
+			} else {
 				tp.alphaAlertVal -= tp.blinkingSpeed * Time.deltaTime / Time.timeScale;
-				if (tp.alphaAlertVal < 0f){
+				if (tp.alphaAlertVal < 0f) {
 					tp.growing = true;
 				}
 			}
 
-			if (sliderG.value > tp.GAlertThreshold){
+			if (sliderG.value > tp.GAlertThreshold) {
 				GAlert.enabled = true;
 				Color c = GAlert.color;
 				c.a = tp.alphaAlertVal;
 				GAlert.color = c;
-			}else{
+			} else {
 				GAlert.enabled = false;
 			}
 
-			if (Mathf.Abs (sliderOrientaion.value) > tp.RotAlertThreshold){
+			if (Mathf.Abs (sliderOrientaion.value) > tp.RotAlertThreshold) {
 				RotAlert.enabled = true;
 				Color c = RotAlert.color;
 				c.a = tp.alphaAlertVal;
 				RotAlert.color = c;
-			}else{
+			} else {
 				RotAlert.enabled = false;
 			}
 

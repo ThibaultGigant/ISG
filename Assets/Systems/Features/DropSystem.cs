@@ -1,27 +1,29 @@
 ﻿using UnityEngine;
 using FYFY;
 
-public class DropSystem : FSystem {
+public class DropSystem : FSystem
+{
 	// Récupération des familles sur lesquelles agit le système
-	protected Family largables = FamilyManager.getFamily(new AllOfComponents(typeof(Largable), typeof(Masse)));
+	protected Family largables = FamilyManager.getFamily (new AllOfComponents (typeof(Largable), typeof(Masse)));
 
-	// Use this to update member variables when system pause. 
+	// Use this to update member variables when system pause.
 	// Advice: avoid to update your families inside this function.
-	protected override void onPause(int currentFrame) {
+	protected override void onPause (int currentFrame)
+	{
 	}
 
 	// Use this to update member variables when system resume.
 	// Advice: avoid to update your families inside this function.
-	protected override void onResume(int currentFrame){
+	protected override void onResume (int currentFrame)
+	{
 	}
 
 	// Use to process your families.
-	protected override void onProcess(int familiesUpdateCount) {
-		foreach (GameObject go in largables)
-		{
-			if (go.GetComponent<Largable> ().toDrop)
-			{
-				Rigidbody rb = go.GetComponent<Rigidbody>();
+	protected override void onProcess (int familiesUpdateCount)
+	{
+		foreach (GameObject go in largables) {
+			if (go.GetComponent<Largable> ().toDrop) {
+				Rigidbody rb = go.GetComponent<Rigidbody> ();
 				if (rb != null) {
 					rb.velocity = go.transform.parent.GetComponentInParent<Rigidbody> ().velocity;
 
@@ -37,8 +39,7 @@ public class DropSystem : FSystem {
 				} else {
 
 					Propulseur[] propfils = go.GetComponentsInChildren<Propulseur> ();
-					foreach (Propulseur p in propfils)
-					{
+					foreach (Propulseur p in propfils) {
 						prepareToJettison (go, p.gameObject);
 					}
 
@@ -57,7 +58,7 @@ public class DropSystem : FSystem {
 	/**
 	 * Rajoute le RigidBody au parent et met les targets des propulseurs à jour
 	 */
-	void prepareToJettison(GameObject father, GameObject dropped)
+	void prepareToJettison (GameObject father, GameObject dropped)
 	{
 		// Création d'un RigidBody à lui ajouter
 		if (dropped.GetComponent<Rigidbody> () == null && dropped == father) {

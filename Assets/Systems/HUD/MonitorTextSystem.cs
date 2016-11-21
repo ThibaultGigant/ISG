@@ -93,7 +93,8 @@ public class MonitorTextSystem : FSystem
 				string tex = "T : + " + (int)m.timer + "\n";
 				tex += "Speed : " + (int)getQueueMean (m.speedQueue) + " km/h" + "\n"; 
 				tex += "Grnd Speed : " + (int)getQueueMean (m.groundSpeedQueue) + " km/h\n";
-				tex += "Acceleration : " + strG + " G" + "\n";
+				//tex += "Acceleration : " + strG + " G" + "\n";
+				tex += "Drag : " + m.target.GetComponent<Rigidbody> ().drag + "\n";
 				tex += "Altitude : " + strAlt + " km" + "\n";
 
 				foreach (string str in m.messageQueue) {

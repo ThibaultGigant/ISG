@@ -31,7 +31,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 			count++;
 		}
 
-		Debug.Log ("Ascension - Count : "+count+" Max : "+max);
+		Debug.Log ("Ascension - Count : " + count + " Max : " + max);
 
 	}
 
@@ -46,7 +46,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		int max = 10000;
 		int count = 1;
 
-		float constante = 1f ;
+		float constante = 1f;
 		constante *= generator.stepDuration;
 
 		while (last.orientation < generator.targetAlignmentOrientation && count < max) {
@@ -65,7 +65,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 			count++;
 		}
 
-		Debug.Log ("Alignement - Count : "+count+" Max : "+max);
+		Debug.Log ("Alignement - Count : " + count + " Max : " + max);
 		last.speed = last.speed * Mathf.Sin (last.orientation);
 
 	}
@@ -86,7 +86,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		float xSpeed = last.speed;
 		float ySpeed = 0f;
 
-		while (PhysicsConstants.GetAltitude(last.position) > 63710f && count < max) {
+		while (PhysicsConstants.GetAltitude (last.position) > 0f && count < max) {
 
 			Vector3 newPosition = last.position;
 
@@ -100,7 +100,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 			count++;
 		}
 
-		Debug.Log ("Reentry - Count : "+count+" Max : "+max);
+		Debug.Log ("Reentry - Count : " + count + " Max : " + max);
 	}
 
 
