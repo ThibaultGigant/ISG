@@ -13,7 +13,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		CheckPointInfos last = GenerateCheckPoint (generatorGo.transform.position, 0f, 0f, 0f);
 		generator.checkPoints.Add (last);
 
-		int max = 500;
+		int max = 10000;
 		int count = 0;
 
 
@@ -31,6 +31,8 @@ public class Level1Generator : TrajectoryGeneratorSystem
 			count++;
 		}
 
+		Debug.Log ("Ascension - Count : "+count+" Max : "+max);
+
 	}
 
 	protected override void CalculateAlignement (GameObject generatorGo)
@@ -41,7 +43,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 
 		CheckPointInfos last = generator.checkPoints [generator.checkPoints.Count - 1];
 
-		int max = 5000;
+		int max = 10000;
 		int count = 1;
 
 		float constante = .1f;
@@ -62,6 +64,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 			count++;
 		}
 
+		Debug.Log ("Alignement - Count : "+count+" Max : "+max);
 		last.speed = last.speed * Mathf.Sin (last.orientation);
 
 	}
@@ -74,7 +77,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		CheckPointInfos last = generator.checkPoints [generator.checkPoints.Count - 1];
 
 
-		int max = 5000;
+		int max = 10000;
 		int count = 1;
 
 		float G = -9.81f / 10f;
@@ -82,7 +85,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		float xSpeed = last.speed;
 		float ySpeed = 0f;
 
-		while (GetCheckPointHeight (last.position) > 0f && count < max) {
+		while (GetCheckPointHeight (last.position) > 63710f && count < max) {
 
 			Vector3 newPosition = last.position;
 
@@ -96,7 +99,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 			count++;
 		}
 
-		
+		Debug.Log ("Reentry - Count : "+count+" Max : "+max);
 	}
 
 
