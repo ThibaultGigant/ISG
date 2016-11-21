@@ -96,11 +96,5 @@ public abstract class TrajectoryGeneratorSystem : FSystem
 		check.orientation = orientation;
 		return check;
 	}
-
-	public float GetCheckPointHeight (Vector3 position)
-	{
-		float alt = Vector3.Distance (Vector3.zero, position);
-		//alt -= 63710;
-		return alt;
-	}
+		
 }

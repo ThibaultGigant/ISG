@@ -17,7 +17,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		int count = 0;
 
 
-		while (GetCheckPointHeight (last.position) < generator.targetAscensionHeight && count < max) {
+		while (PhysicsConstants.GetAltitude (last.position) < generator.targetAscensionHeight && count < max) {
 
 
 			float newAcceleration = generator.targetG;
@@ -86,7 +86,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		float xSpeed = last.speed;
 		float ySpeed = 0f;
 
-		while (GetCheckPointHeight (last.position) > 63710f && count < max) {
+		while (PhysicsConstants.GetAltitude(last.position) > 63710f && count < max) {
 
 			Vector3 newPosition = last.position;
 
