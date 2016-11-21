@@ -4,11 +4,25 @@ using System.Collections;
 public class TrackingPanel : MonoBehaviour
 {
 
-	public int lastCheckPointIndex;
+
+	public int memory;
 	public GameObject target;
+
+	public float rotRange;
+	public float GRange;
+
+	public float GAlertThreshold;
+	public float RotAlertThreshold;
+
+	public float alphaAlertVal;
+	public bool growing;
+	public float blinkingSpeed;
+
+	public int lastCheckPointIndex;
+
 	public TrajectoryGenerator trajectory;
 
 	public Vector3 lastVelocity;
-	public int memory;
+
 	public LimitedQueue<float> GQueue;
 }

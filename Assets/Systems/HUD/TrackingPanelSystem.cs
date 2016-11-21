@@ -15,9 +15,24 @@ public class TrackingPanelSystem : FSystem
 
 		foreach (GameObject go in panels) {
 			TrackingPanel tp = go.GetComponent<TrackingPanel> ();
+
+			Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
+			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
+			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image>();
+			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image>();
+
 			tp.lastVelocity = Vector3.zero;
 			tp.lastCheckPointIndex = 0;
+
 			tp.GQueue = new LimitedQueue<float> (tp.memory);
+
+			sliderG.maxValue = tp.GRange;
+
+			sliderOrientaion.minValue = -tp.rotRange/2;
+			sliderOrientaion.maxValue = tp.rotRange/2;
+
+			GAlert.enabled = false;
+			RotAlert.enabled = false;
 		}
 
 	}
@@ -30,6 +45,9 @@ public class TrackingPanelSystem : FSystem
 			TrackingPanel tp = go.GetComponent<TrackingPanel> ();
 			Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
 			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
+
+			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image>();
+			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image>();
 
 			GameObject rocket = tp.target;
 
@@ -62,6 +80,37 @@ public class TrackingPanelSystem : FSystem
 			sliderG.value = getQueueMean (tp.GQueue);
 			tp.lastVelocity = lastVelocity;
 			sliderOrientaion.value = tp.target.transform.rotation.x * 180 - tp.trajectory.checkPoints [bestIndex].orientation;
+
+			if(tp.growing){
+				tp.alphaAlertVal += tp.blinkingSpeed * Time.deltaTime;
+				if (tp.alphaAlertVal > 1f){
+					tp.growing = false;
+				}
+			}else{
+				tp.alphaAlertVal -= tp.blinkingSpeed * Time.deltaTime;
+				if (tp.alphaAlertVal < 0f){
+					tp.growing = true;
+				}
+			}
+
+			if (sliderG.value > tp.GAlertThreshold){
+				GAlert.enabled = true;
+				Color c = GAlert.color;
+				c.a = tp.alphaAlertVal;
+				GAlert.color = c;
+			}else{
+				GAlert.enabled = false;
+			}
+
+			if (Mathf.Abs (sliderOrientaion.value) > tp.RotAlertThreshold){
+				RotAlert.enabled = true;
+				Color c = RotAlert.color;
+				c.a = tp.alphaAlertVal;
+				RotAlert.color = c;
+			}else{
+				RotAlert.enabled = false;
+			}
+
 		}
 	
 	}

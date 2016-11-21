@@ -19,9 +19,9 @@ public class OrientationSystem : FSystem {
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
 		foreach (GameObject go in orbiteurs) {
-			if (Input.GetKey (KeyCode.UpArrow))
+			if (Input.GetKey (KeyCode.Z))
 				go.GetComponent<Rigidbody> ().AddRelativeTorque (Vector3.right, ForceMode.Acceleration);
-			if (Input.GetKey (KeyCode.DownArrow))
+			if (Input.GetKey (KeyCode.S))
 				go.GetComponent<Rigidbody> ().AddRelativeTorque (-Vector3.right, ForceMode.Acceleration);
 		}
 	}

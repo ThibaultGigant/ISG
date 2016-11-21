@@ -28,7 +28,6 @@ public class CameraSystem : FSystem
 
 		foreach (GameObject go in cameras) {
 			CameraComponent cam = go.GetComponentInChildren<CameraComponent> ();
-			//Debug.Log (cam);
 			cam.theCamera = go.transform.Find ("Main Camera").gameObject.GetComponent<Camera> ();
 			cam.mouseLook.Init (go.transform, cam.theCamera.transform);
 		}
@@ -41,11 +40,11 @@ public class CameraSystem : FSystem
 
 
 
-			if (Input.GetKey (KeyCode.Z)) {
+			if (Input.GetKey (KeyCode.O)) {
 				
 				cam.angleX += ((Input.GetKey (KeyCode.LeftShift)) ? cam.speed * 5 : cam.speed) / Time.deltaTime;
 			}
-			if (Input.GetKey (KeyCode.S)) {
+			if (Input.GetKey (KeyCode.L)) {
 				cam.angleX -= ((Input.GetKey (KeyCode.LeftShift)) ? cam.speed * 5 : cam.speed) / Time.deltaTime;
 			}
 
