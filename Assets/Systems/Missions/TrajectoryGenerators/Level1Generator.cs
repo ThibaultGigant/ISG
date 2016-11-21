@@ -94,7 +94,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 			ySpeed += G * generator.stepDuration;
 			newPosition += ySpeed * generator.stepDuration * last.position.normalized;
 
-			last = GenerateCheckPoint (newPosition, Mathf.Abs (Vector3.Distance (last.position, newPosition)), -1f, 70);
+			last = GenerateCheckPoint (newPosition, Mathf.Abs (Vector3.Distance (last.position, newPosition)), -1f, -70);
 			generator.checkPoints.Add (last);
 			count++;
 		}

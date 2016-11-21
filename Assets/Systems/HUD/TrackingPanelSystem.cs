@@ -82,12 +82,12 @@ public class TrackingPanelSystem : FSystem
 			sliderOrientaion.value = tp.target.transform.rotation.x * 180 - tp.trajectory.checkPoints [bestIndex].orientation;
 
 			if(tp.growing){
-				tp.alphaAlertVal += tp.blinkingSpeed * Time.deltaTime;
+				tp.alphaAlertVal += tp.blinkingSpeed * Time.deltaTime / Time.timeScale;
 				if (tp.alphaAlertVal > 1f){
 					tp.growing = false;
 				}
 			}else{
-				tp.alphaAlertVal -= tp.blinkingSpeed * Time.deltaTime;
+				tp.alphaAlertVal -= tp.blinkingSpeed * Time.deltaTime / Time.timeScale;
 				if (tp.alphaAlertVal < 0f){
 					tp.growing = true;
 				}
