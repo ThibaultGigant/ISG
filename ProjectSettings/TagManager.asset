@@ -10,6 +10,7 @@ TagManager:
   - Tank
   - TrajectoryGenerator
   - CheckPoint
+  - EscapeTower
   layers:
   - Default
   - TransparentFX

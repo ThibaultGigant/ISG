@@ -46,7 +46,8 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		int max = 10000;
 		int count = 1;
 
-		float constante = .1f;
+		float constante = 1f ;
+		constante *= generator.stepDuration;
 
 		while (last.orientation < generator.targetAlignmentOrientation && count < max) {
 

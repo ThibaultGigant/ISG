@@ -75,7 +75,9 @@ public class TrackingPanelSystem : FSystem
 
 			tp.lastCheckPointIndex = bestIndex;
 			Vector3 lastVelocity = tp.target.GetComponent<Rigidbody> ().velocity;
-			float G = (lastVelocity - tp.lastVelocity).magnitude * 9.81f;
+
+			float G = (lastVelocity - tp.lastVelocity).magnitude * 9.81f / Time.timeScale;
+
 			tp.GQueue.Enqueue (G);
 			sliderG.value = getQueueMean (tp.GQueue);
 			tp.lastVelocity = lastVelocity;
