@@ -96,6 +96,11 @@ public class TrackingPanelSystem : FSystem
 			}
 			tp.lastCheckPointIndex = bestIndex;
 
+			Debug.Log ("Index : " + tp.lastCheckPointIndex);
+			Debug.Log ("Position " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].position);
+			Debug.Log ("Le G que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].acceleration.ToString());
+			Debug.Log ("La speed que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].speed.ToString());
+
 			//@@@@@@@@@@@@@@@@@@
 			// Sliders
 			//@@@@@@@@@@@@@@@@@@
