@@ -4,7 +4,7 @@ using FYFY;
 public class OrientationSystem : FSystem
 {
 
-	private Family orbiteurs = FamilyManager.getFamily (new AllOfComponents (typeof(Rigidbody)));
+	private Family orbiteurs = FamilyManager.getFamily (new AllOfComponents (typeof(Rigidbody)), new AnyOfTags("Orientable"));
 
 
 	// Use this to update member variables when system pause.

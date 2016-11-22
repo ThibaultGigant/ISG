@@ -11,6 +11,7 @@ TagManager:
   - TrajectoryGenerator
   - CheckPoint
   - EscapeTower
+  - Orientable
   layers:
   - Default
   - TransparentFX
