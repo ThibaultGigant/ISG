@@ -26,9 +26,10 @@ public class DropSystem : FSystem
 				Rigidbody rb = go.GetComponent<Rigidbody> ();
 				if (rb != null) {
 					rb.velocity = go.transform.parent.GetComponentInParent<Rigidbody> ().velocity;
+					rb.useGravity = false;
 
 					// Ajout d'une force sur le côté pour éloigner l'objet
-					rb.AddForce (go.transform.localPosition.normalized * 1e3f); 
+					rb.AddForce (go.transform.localPosition.normalized * 1e4f); 
 					rb.AddTorque (new Vector3 (0, 0, -go.transform.localPosition.x));
 
 					// Séparation en bougeant de la hiérarchie
