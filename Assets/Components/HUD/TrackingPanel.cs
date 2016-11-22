@@ -20,6 +20,8 @@ public class TrackingPanel : MonoBehaviour
 	public bool growing;
 	public float blinkingSpeed;
 
+	public GameObject earth;
+
 	public int lastCheckPointIndex;
 
 	public TrajectoryGenerator trajectory;

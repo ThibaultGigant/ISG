@@ -57,10 +57,14 @@ public class TrackingPanelSystem : FSystem
 			Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
 			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
 			Slider dragSlider = go.transform.Find ("PanelDrag/DragSlider").GetComponent<Slider> ();
+			Slider orientationSlider = go.transform.Find ("PanelOrientation2/OrientationSlider").GetComponent<Slider> ();
 
 			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image> ();
 			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image> ();
 			Image DragAlert = go.transform.Find ("PanelDrag/Panel/Image").GetComponent<Image> ();
+			Image orientationAlert = go.transform.Find ("PanelOrientation2/Panel").GetComponent<Image> ();
+
+			Text affichageDegres = go.transform.Find ("PanelOrientation2/Affichage/Text").GetComponent<Text> ();
 
 			GameObject rocket = tp.target;
 
@@ -109,6 +113,14 @@ public class TrackingPanelSystem : FSystem
 
 			dragSlider.value = rb.drag;
 
+			Vector3 dirGravity = ( tp.earth.transform.position - rocket.transform.position ).normalized ;
+			Vector3 dirShuttle = rocket.transform.up.normalized;
+			float angle = Vector3.Angle (dirShuttle,dirGravity) * Mathf.Sign(Vector3.Cross(dirGravity,dirShuttle).x) + 180f;
+			orientationSlider.value = (angle>180f) ? (angle - 360) : angle;
+			Debug.Log ("Angle: " + angle + " " + orientationSlider.value);
+			affichageDegres.text = orientationSlider.value.ToString ("###0") + "°";
+			//text.text = angle.ToString ("D") + "°";
+
 
 			//@@@@@@@@@@@@@@@@@@
 			// 
@@ -146,6 +158,16 @@ public class TrackingPanelSystem : FSystem
 				RotAlert.color = c;
 			} else {
 				RotAlert.enabled = false;
+			}
+
+			if (orientationSlider.value > 90 || orientationSlider.value < -90) {
+				Color c = Color.red;
+				c.a = tp.alphaAlertVal;
+				orientationAlert.color = c;
+			} else {
+				Color c = Color.white;
+				c.a = 100;
+				orientationAlert.color = c;
 			}
 
 			if (dragSlider.value > tp.DragAlertThreshold) {
