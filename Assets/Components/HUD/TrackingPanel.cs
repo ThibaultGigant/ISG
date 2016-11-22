@@ -10,9 +10,11 @@ public class TrackingPanel : MonoBehaviour
 
 	public float rotRange;
 	public float GRange;
+	public float dragRange;
 
 	public float GAlertThreshold;
 	public float RotAlertThreshold;
+	public float DragAlertThreshold;
 
 	public float alphaAlertVal;
 	public bool growing;

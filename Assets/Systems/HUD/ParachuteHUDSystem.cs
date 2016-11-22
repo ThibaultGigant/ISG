@@ -22,11 +22,20 @@ public class ParachuteHUDSystem : FSystem {
 		foreach (GameObject go in parachuteButtons) {
 			Slider slider = go.GetComponentInChildren<Slider> ();
 			if (slider.value == 1) {
-				foreach (Parachute parachute in go.GetComponent<ParachuteHUDComponent> ().parachutes) {
-					parachute.on = true;
+
+				ParachuteHUDComponent para = go.GetComponent<ParachuteHUDComponent> ();
+
+				if (para.open){
+					foreach (Parachute parachute in para.parachutes) {
+						parachute.on = true;
+					}
+					GameObjectManager.removeComponent (go.GetComponent<ParachuteHUDComponent> ());
+				}else{
+					foreach (Parachute parachute in para.parachutes) {
+						parachute.release = true;
+					}
 				}
 				slider.interactable = false;
-				GameObjectManager.removeComponent (go.GetComponent<ParachuteHUDComponent> ());
 			}
 		}
 

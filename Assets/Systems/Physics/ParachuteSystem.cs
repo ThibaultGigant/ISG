@@ -24,12 +24,27 @@ public class ParachuteSystem : FSystem {
 
 				rb.drag += p.drag * Mathf.Sqrt (Mathf.Max (0, PhysicsConstants.atmosphereEnd - PhysicsConstants.GetAltitude (rb.position)));
 
-				if(rb.drag > p.breakForce){
+				if(rb.drag > p.breakForce ){
 					GameObjectManager.removeComponent<Parachute> (go);
+					foreach(GameObject para in p.toEnable){
+						para.SetActive (false);
+					}
+				}
+
+				foreach(GameObject para in p.toEnable){
+					para.SetActive (true);
 				}
 
 			}
 
+			if(p.release){
+				GameObjectManager.removeComponent<Parachute> (go);
+				foreach(GameObject para in p.toEnable){
+					para.SetActive (true);
+					para.transform.parent = null;
+				}	
+			}
 		}
+
 	}
 }

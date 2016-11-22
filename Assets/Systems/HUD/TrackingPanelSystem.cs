@@ -18,8 +18,11 @@ public class TrackingPanelSystem : FSystem
 
 			Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
 			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
+			Slider dragSlider = go.transform.Find ("PanelDrag/DragSlider").GetComponent<Slider> ();
+
 			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image> ();
 			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image> ();
+			Image DragAlert = go.transform.Find ("PanelDrag/Panel/Image").GetComponent<Image> ();
 
 			tp.lastVelocity = Vector3.zero;
 			tp.lastCheckPointIndex = 0;
@@ -31,8 +34,11 @@ public class TrackingPanelSystem : FSystem
 			sliderOrientaion.minValue = -tp.rotRange / 2;
 			sliderOrientaion.maxValue = tp.rotRange / 2;
 
+			dragSlider.maxValue = tp.dragRange;
+
 			GAlert.enabled = false;
 			RotAlert.enabled = false;
+			DragAlert.enabled = false;
 		}
 
 	}
@@ -42,20 +48,32 @@ public class TrackingPanelSystem : FSystem
 	{
 	
 		foreach (GameObject go in panels) {
+
+			//@@@@@@@@@@@@@@@@@@
+			// Components
+			//@@@@@@@@@@@@@@@@@@
+
 			TrackingPanel tp = go.GetComponent<TrackingPanel> ();
 			Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
 			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
+			Slider dragSlider = go.transform.Find ("PanelDrag/DragSlider").GetComponent<Slider> ();
 
 			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image> ();
 			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image> ();
+			Image DragAlert = go.transform.Find ("PanelDrag/Panel/Image").GetComponent<Image> ();
 
 			GameObject rocket = tp.target;
 
-		
+
+			//@@@@@@@@@@@@@@@@@@
+			// Best Check Point
+			//@@@@@@@@@@@@@@@@@@
+
 			int bestIndex = tp.lastCheckPointIndex;
 			float bestDistance = Vector3.Distance (tp.trajectory.checkPoints [bestIndex].position, tp.target.transform.position);
 			int temp = Mathf.Min (bestIndex + 1, tp.trajectory.checkPoints.Count - 1);
 			float tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
+
 
 			while (temp < tp.trajectory.checkPoints.Count - 1 && tempDistance < bestDistance) {
 				bestIndex = temp;
@@ -72,9 +90,15 @@ public class TrackingPanelSystem : FSystem
 				temp++;
 				tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
 			}
-
 			tp.lastCheckPointIndex = bestIndex;
-			Vector3 lastVelocity = tp.target.GetComponent<Rigidbody> ().velocity;
+
+			//@@@@@@@@@@@@@@@@@@
+			// Sliders
+			//@@@@@@@@@@@@@@@@@@
+
+			Rigidbody rb = tp.target.GetComponent<Rigidbody> ();
+
+			Vector3 lastVelocity = rb.velocity;
 
 			float G = (lastVelocity - tp.lastVelocity).magnitude * 9.81f / Time.timeScale * 10f; // 10 pour la mise à l'echelle
 
@@ -82,6 +106,13 @@ public class TrackingPanelSystem : FSystem
 			sliderG.value = getQueueMean (tp.GQueue);
 			tp.lastVelocity = lastVelocity;
 			sliderOrientaion.value = tp.target.transform.rotation.x * 180 - tp.trajectory.checkPoints [bestIndex].orientation;
+
+			dragSlider.value = rb.drag;
+
+
+			//@@@@@@@@@@@@@@@@@@
+			// 
+			//@@@@@@@@@@@@@@@@@@
 
 			if (tp.growing) {
 				tp.alphaAlertVal += tp.blinkingSpeed * Time.deltaTime / Time.timeScale;
@@ -94,6 +125,10 @@ public class TrackingPanelSystem : FSystem
 					tp.growing = true;
 				}
 			}
+
+			//@@@@@@@@@@@@@@@@@@
+			//
+			//@@@@@@@@@@@@@@@@@@
 
 			if (sliderG.value > tp.GAlertThreshold) {
 				GAlert.enabled = true;
@@ -111,6 +146,15 @@ public class TrackingPanelSystem : FSystem
 				RotAlert.color = c;
 			} else {
 				RotAlert.enabled = false;
+			}
+
+			if (dragSlider.value > tp.DragAlertThreshold) {
+				DragAlert.enabled = true;
+				Color c = DragAlert.color;
+				c.a = tp.alphaAlertVal;
+				DragAlert.color = c;
+			} else {
+				DragAlert.enabled = false;
 			}
 
 		}
