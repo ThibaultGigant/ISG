@@ -24,7 +24,7 @@ public class DragSystem : FSystem
 		foreach (GameObject go in rigids) {
 			Rigidbody rb = go.GetComponent<Rigidbody> ();
 			//rb.drag = Mathf.Sqrt (Mathf.Max (0, PhysicsConstants.atmosphereEnd - PhysicsConstants.GetAltitude (rb.position))) * Mathf.Pow (rb.velocity.magnitude, 2);
-			rb.drag = Mathf.Sqrt (Mathf.Max (0, PhysicsConstants.atmosphereEnd - PhysicsConstants.GetAltitude (rb.position))) / 2000;
+			rb.drag = Mathf.Sqrt (Mathf.Max (0, PhysicsConstants.atmosphereEnd - PhysicsConstants.GetAltitude (rb.position))) / 600;
 		}
 
 	}

@@ -58,9 +58,7 @@ public class MonitorTextSystem : FSystem
 			float g = (speed - m.lastSpeed) / Time.fixedDeltaTime / 9.81f / 2f;
 
 			// Calcul de l'altitude
-			float alt = Vector3.Distance (Vector3.zero, m.target.transform.position) * m.scale;
-			alt -= 6371000;
-			alt /= 1000f;
+			float alt = PhysicsConstants.GetAltitude(m.target.transform.position);
 
 			// Calcul de la vitesse au sol
 
