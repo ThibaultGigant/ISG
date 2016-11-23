@@ -88,12 +88,12 @@ public class TrackingPanelSystem : FSystem
 				tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
 			}
 			tp.lastCheckPointIndex = bestIndex;
-
+			/*
 			Debug.Log ("Index : " + tp.lastCheckPointIndex);
 			Debug.Log ("Position " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].position);
 			Debug.Log ("Le G que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].acceleration.ToString());
 			Debug.Log ("La speed que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].speed.ToString());
-
+			*/
 			//@@@@@@@@@@@@@@@@@@
 			// Sliders
 			//@@@@@@@@@@@@@@@@@@
@@ -111,10 +111,10 @@ public class TrackingPanelSystem : FSystem
 
 			dragSlider.value = rb.drag;
 
-			Vector3 dirGravity = ( tp.earth.transform.position - rocket.transform.position ).normalized ;
+			Vector3 dirGravity = (tp.earth.transform.position - rocket.transform.position).normalized;
 			Vector3 dirShuttle = rocket.transform.up.normalized;
-			float angle = Vector3.Angle (dirShuttle,dirGravity) * Mathf.Sign(Vector3.Cross(dirGravity,dirShuttle).x) + 180f;
-			orientationSlider.value = (angle>180f) ? (angle - 360) : angle;
+			float angle = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
+			orientationSlider.value = (angle > 180f) ? (angle - 360) : angle;
 			affichageDegres.text = orientationSlider.value.ToString ("###0") + "°";
 
 
