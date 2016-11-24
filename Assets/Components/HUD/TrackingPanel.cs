@@ -3,30 +3,15 @@ using System.Collections;
 
 public class TrackingPanel : MonoBehaviour
 {
-
-
 	public int memory;
-	public GameObject target;
-
-	public float rotRange;
-	public float GRange;
-	public float dragRange;
-
-	public float GAlertThreshold;
-	public float RotAlertThreshold;
-	public float DragAlertThreshold;
-
-	public float alphaAlertVal;
-	public bool growing;
 	public float blinkingSpeed;
-
-	public GameObject earth;
-
-	public int lastCheckPointIndex;
-
-	public TrajectoryGenerator trajectory;
-
-	public Vector3 lastVelocity;
-
+	[HideInInspector]
+	public bool growing;
+	public float GRange;
+	public float rotRange;
+	public float dragRange;
+	[HideInInspector]
 	public LimitedQueue<float> GQueue;
+	[HideInInspector]
+	public float alphaAlertVal;
 }
