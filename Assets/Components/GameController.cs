@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject target;
 	public TrajectoryGenerator generator;
+	public GameObject prefabExplosion;
 
 	public float maxTrajectoryDistance;
 
@@ -23,6 +24,14 @@ public class GameController : MonoBehaviour {
 	public float groundSpeed;
 	public float altitude;
 	public float drag;
+
+	public int memory;
+
+	public LimitedQueue<float> speedQueue;
+	public LimitedQueue<float> accelerationQueue;
+	public LimitedQueue<float> groundSpeedQueue;
+	public LimitedQueue<float> altitudeQueue;
+	public LimitedQueue<float> dragQueue;
 
 
 	public float orientation;

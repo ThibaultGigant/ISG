@@ -24,8 +24,10 @@ public class DropSystem : FSystem
 		foreach (GameObject go in largables) {
 			if (go.GetComponent<Largable> ().toDrop) {
 				Rigidbody rb = go.GetComponent<Rigidbody> ();
-				if (rb != null) {
-					rb.velocity = go.transform.parent.GetComponentInParent<Rigidbody> ().velocity;
+				if (rb != null ) {
+					if (go.transform.parent != null) {
+						rb.velocity = go.transform.parent.GetComponentInParent<Rigidbody> ().velocity;
+					}
 					rb.useGravity = false;
 
 					// Ajout d'une force sur le côté pour éloigner l'objet

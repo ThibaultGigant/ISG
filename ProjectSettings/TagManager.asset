@@ -12,6 +12,8 @@ TagManager:
   - CheckPoint
   - EscapeTower
   - Orientable
+  - Explosive
+  - NonExplosive
   layers:
   - Default
   - TransparentFX

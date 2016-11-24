@@ -109,8 +109,8 @@ public class TrackingPanelSystem : FSystem
 				/*tp.lastVelocity = lastVelocity;
 				sliderOrientaion.value = tp.target.transform.rotation.x * 180 - tp.trajectory.checkPoints [bestIndex].orientation;*/
 
-				dragSlider.value = gc.drag;
-
+				dragSlider.value = Mathf.Log (gc.drag);
+				Debug.Log (dragSlider.value);
 				/*Vector3 dirGravity = (tp.earth.transform.position - rocket.transform.position).normalized;
 				Vector3 dirShuttle = rocket.transform.up.normalized;
 				float angle = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
