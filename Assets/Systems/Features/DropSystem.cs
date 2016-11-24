@@ -29,7 +29,7 @@ public class DropSystem : FSystem
 					rb.useGravity = false;
 
 					// Ajout d'une force sur le côté pour éloigner l'objet
-					rb.AddForce (go.transform.localPosition.normalized * rb.mass * 1e2f); 
+					rb.AddForce (Vector3.right * rb.mass * 20 + go.transform.localPosition.normalized * rb.mass * 1e2f); 
 					rb.AddTorque (new Vector3 (0, 0, -go.transform.localPosition.x));
 
 					// Séparation en bougeant de la hiérarchie
@@ -43,8 +43,7 @@ public class DropSystem : FSystem
 					foreach (Propulseur p in propfils) {
 						prepareToJettison (go, p.gameObject);
 					}
-
-
+						
 					// Désactivation du Tank
 					if (go.CompareTag ("Tank")) {
 						go.GetComponent<Flames> ().isOn = false;

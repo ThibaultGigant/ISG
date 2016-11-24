@@ -4,7 +4,7 @@ using FYFY;
 public class OrientationSystem : FSystem
 {
 
-	private Family orbiteurs = FamilyManager.getFamily (new AllOfComponents (typeof(Rigidbody)), new AnyOfTags("Orientable"));
+	private Family orbiteurs = FamilyManager.getFamily (new AllOfComponents (typeof(Rigidbody)), new AnyOfTags ("Orientable"));
 
 
 	// Use this to update member variables when system pause.
@@ -24,9 +24,9 @@ public class OrientationSystem : FSystem
 	{
 		foreach (GameObject go in orbiteurs) {
 			if (Input.GetKey (KeyCode.Z))
-				go.GetComponent<Rigidbody> ().AddRelativeTorque (Vector3.right / 20f, ForceMode.Acceleration);
+				go.GetComponent<Rigidbody> ().AddRelativeTorque (Vector3.right / 8f, ForceMode.Acceleration);
 			if (Input.GetKey (KeyCode.S))
-				go.GetComponent<Rigidbody> ().AddRelativeTorque (-Vector3.right / 20f, ForceMode.Acceleration);
+				go.GetComponent<Rigidbody> ().AddRelativeTorque (-Vector3.right / 8f, ForceMode.Acceleration);
 		}
 	}
 }

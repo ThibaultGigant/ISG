@@ -20,10 +20,6 @@ public class TrackingPanelSystem : FSystem
 			Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
 			Slider dragSlider = go.transform.Find ("PanelDrag/DragSlider").GetComponent<Slider> ();
 
-			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image> ();
-			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image> ();
-			Image DragAlert = go.transform.Find ("PanelDrag/Panel/Image").GetComponent<Image> ();
-
 			tp.lastVelocity = Vector3.zero;
 			tp.lastCheckPointIndex = 0;
 
@@ -36,9 +32,6 @@ public class TrackingPanelSystem : FSystem
 
 			dragSlider.maxValue = tp.dragRange;
 
-			GAlert.enabled = false;
-			RotAlert.enabled = false;
-			DragAlert.enabled = false;
 		}
 
 	}
@@ -59,9 +52,9 @@ public class TrackingPanelSystem : FSystem
 			Slider dragSlider = go.transform.Find ("PanelDrag/DragSlider").GetComponent<Slider> ();
 			Slider orientationSlider = go.transform.Find ("PanelOrientation2/OrientationSlider").GetComponent<Slider> ();
 
-			Image GAlert = go.transform.Find ("PanelG/Panel/Image").GetComponent<Image> ();
-			Image RotAlert = go.transform.Find ("PanelOrientation/Panel/Image").GetComponent<Image> ();
-			Image DragAlert = go.transform.Find ("PanelDrag/Panel/Image").GetComponent<Image> ();
+			Image GAlert = go.transform.Find ("PanelG/Panel").GetComponent<Image> ();
+			Image RotAlert = go.transform.Find ("PanelOrientation/Panel").GetComponent<Image> ();
+			Image DragAlert = go.transform.Find ("PanelDrag/Panel").GetComponent<Image> ();
 			Image orientationAlert = go.transform.Find ("PanelOrientation2/Panel").GetComponent<Image> ();
 
 			Text affichageDegres = go.transform.Find ("PanelOrientation2/Affichage/Text").GetComponent<Text> ();
@@ -95,7 +88,12 @@ public class TrackingPanelSystem : FSystem
 				tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
 			}
 			tp.lastCheckPointIndex = bestIndex;
-
+			/*
+			Debug.Log ("Index : " + tp.lastCheckPointIndex);
+			Debug.Log ("Position " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].position);
+			Debug.Log ("Le G que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].acceleration.ToString());
+			Debug.Log ("La speed que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].speed.ToString());
+			*/
 			//@@@@@@@@@@@@@@@@@@
 			// Sliders
 			//@@@@@@@@@@@@@@@@@@
@@ -113,13 +111,11 @@ public class TrackingPanelSystem : FSystem
 
 			dragSlider.value = rb.drag;
 
-			Vector3 dirGravity = ( tp.earth.transform.position - rocket.transform.position ).normalized ;
+			Vector3 dirGravity = (tp.earth.transform.position - rocket.transform.position).normalized;
 			Vector3 dirShuttle = rocket.transform.up.normalized;
-			float angle = Vector3.Angle (dirShuttle,dirGravity) * Mathf.Sign(Vector3.Cross(dirGravity,dirShuttle).x) + 180f;
-			orientationSlider.value = (angle>180f) ? (angle - 360) : angle;
-			Debug.Log ("Angle: " + angle + " " + orientationSlider.value);
+			float angle = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
+			orientationSlider.value = (angle > 180f) ? (angle - 360) : angle;
 			affichageDegres.text = orientationSlider.value.ToString ("###0") + "°";
-			//text.text = angle.ToString ("D") + "°";
 
 
 			//@@@@@@@@@@@@@@@@@@
@@ -143,21 +139,23 @@ public class TrackingPanelSystem : FSystem
 			//@@@@@@@@@@@@@@@@@@
 
 			if (sliderG.value > tp.GAlertThreshold) {
-				GAlert.enabled = true;
-				Color c = GAlert.color;
+				Color c = Color.red;
 				c.a = tp.alphaAlertVal;
 				GAlert.color = c;
 			} else {
-				GAlert.enabled = false;
+				Color c = Color.white;
+				c.a = 100;
+				GAlert.color = c;
 			}
 
 			if (Mathf.Abs (sliderOrientaion.value) > tp.RotAlertThreshold) {
-				RotAlert.enabled = true;
-				Color c = RotAlert.color;
+				Color c = Color.red;
 				c.a = tp.alphaAlertVal;
 				RotAlert.color = c;
 			} else {
-				RotAlert.enabled = false;
+				Color c = Color.white;
+				c.a = 100;
+				RotAlert.color = c;
 			}
 
 			if (orientationSlider.value > 90 || orientationSlider.value < -90) {
@@ -171,12 +169,13 @@ public class TrackingPanelSystem : FSystem
 			}
 
 			if (dragSlider.value > tp.DragAlertThreshold) {
-				DragAlert.enabled = true;
-				Color c = DragAlert.color;
+				Color c = Color.red;
 				c.a = tp.alphaAlertVal;
 				DragAlert.color = c;
 			} else {
-				DragAlert.enabled = false;
+				Color c = Color.white;
+				c.a = 100;
+				DragAlert.color = c;
 			}
 
 		}
