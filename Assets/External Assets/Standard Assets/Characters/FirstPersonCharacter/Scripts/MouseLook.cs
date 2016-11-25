@@ -74,7 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				pos /= queue.Count;
 				Vector3 z = Vector3.zero;
 
-				pos = Vector3.SmoothDamp (camera.transform.position, target.transform.position, ref z, .3f / Time.deltaTime);
+				pos = Vector3.SmoothDamp (camera.transform.position, target.transform.position, ref z, .3f / Time.deltaTime * Time.timeScale);
 			
 				//
 				//camera.transform.rotation = Quaternion.Lerp (camera.transform.rotation, Quaternion.LookRotation (target.transform.position - camera.transform.position), lerpSpeed);

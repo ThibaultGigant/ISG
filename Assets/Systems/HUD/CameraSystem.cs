@@ -41,11 +41,10 @@ public class CameraSystem : FSystem
 
 
 			if (Input.GetKey (KeyCode.O)) {
-				
-				cam.angleX += ((Input.GetKey (KeyCode.LeftShift)) ? cam.speed * 5 : cam.speed) / Time.deltaTime;
+				cam.angleX += ((Input.GetKey (KeyCode.LeftShift)) ? cam.speed * 5 : cam.speed) / Time.deltaTime * Time.timeScale;
 			}
 			if (Input.GetKey (KeyCode.L)) {
-				cam.angleX -= ((Input.GetKey (KeyCode.LeftShift)) ? cam.speed * 5 : cam.speed) / Time.deltaTime;
+				cam.angleX -= ((Input.GetKey (KeyCode.LeftShift)) ? cam.speed * 5 : cam.speed) / Time.deltaTime * Time.timeScale;
 			}
 
 

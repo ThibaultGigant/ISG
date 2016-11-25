@@ -115,7 +115,7 @@ public class TrackingPanelSystem : FSystem
 				float angle = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
 				orientationSlider.value = (angle > 180f) ? (angle - 360) : angle;
 				affichageDegres.text = orientationSlider.value.ToString ("###0") + "°";*/
-				orientationSlider.value = gc.orientation;
+				orientationSlider.value = gc.earthOrientation;
 				affichageDegres.text = orientationSlider.value.ToString ("###0") + "°";
 
 
