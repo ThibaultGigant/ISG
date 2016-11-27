@@ -129,7 +129,7 @@ Material:
       second: 0.5
     - first:
         name: _DetailIntensity
-      second: 0
+      second: 0.03
     - first:
         name: _DetailNormalMapScale
       second: 1
@@ -153,10 +153,10 @@ Material:
       second: 0
     - first:
         name: _NightIntensity
-      second: 0.434
+      second: 1
     - first:
         name: _NightTransitionVariable
-      second: 12.1
+      second: 1
     - first:
         name: _OcclusionStrength
       second: 1
@@ -165,16 +165,16 @@ Material:
       second: 0.02
     - first:
         name: _RimPower
-      second: 0.5
+      second: 64
     - first:
         name: _Shininess
       second: 0.03
     - first:
         name: _Smoothness
-      second: 0.233
+      second: 0
     - first:
         name: _SpecularPower
-      second: 1
+      second: 0
     - first:
         name: _SrcBlend
       second: 1
