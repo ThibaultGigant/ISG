@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using FYFY;
 using FYFY_plugins.CollisionManager;
+using FYFY_plugins.TriggerManager;
 
 public class GameControllerSystem : FSystem
 {
@@ -9,6 +10,8 @@ public class GameControllerSystem : FSystem
 
 	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(Rigidbody), typeof(InCollision3D)));
 	Family explosives = FamilyManager.getFamily (new AnyOfTags ("Explosive"), new AllOfComponents (typeof(Rigidbody)));
+
+	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)), new AnyOfTags("Orientable"));
 
 
 	int currentCheckPointIndex = 0;
@@ -52,6 +55,8 @@ public class GameControllerSystem : FSystem
 			CheckDragFailure (con);
 			CheckDistanceFailure (con);
 			CheckCollision (con);
+
+			CheckTriggers (con);
 		}
 
 		foreach (GameObject go in explosives) {
@@ -180,6 +185,43 @@ public class GameControllerSystem : FSystem
 			largable.gameObject.tag = "Explosive";
 		}
 	}
+
+	protected void CheckTriggers (GameController con) 
+	{
+		foreach (GameObject go in triggers) 
+		{
+			Triggered3D trig = go.GetComponent<Triggered3D> ();
+			GameObject wayPoint = trig.Targets [0];
+			WayPoint wp = wayPoint.GetComponent<WayPoint> ();
+			if (!con.checkedWayPoints.Contains (wp.id)) 
+			{
+				if (con.speed > wp.maxSpeed) {
+					// Trop rapide, t'explose
+					// Explode (go);
+				} else {
+					con.checkedWayPoints.Add (wp.id);
+				}
+				if (wp.last) 
+				{
+					// Dernier waypoint, on vérifie si le joueur a passé tous les waypoints
+					bool win = true;
+					for (int i = 0; i < wp.id && win; i++) 
+					{
+						if (!con.checkedWayPoints.Contains (i)) 
+						{
+							win = false;
+						}
+					}
+					if (win) {
+						Debug.Log ("Win");
+					} else {
+						Debug.Log ("Failure");
+					}
+				}
+			}
+		}
+	}
+
 
 	public float getQueueMean (LimitedQueue<float> q)
 	{

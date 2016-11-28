@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
@@ -37,5 +38,6 @@ public class GameController : MonoBehaviour {
 	public float orientation;
 	public float earthOrientation;
 
+	public HashSet<int> checkedWayPoints = new HashSet<int>();
 
 }
