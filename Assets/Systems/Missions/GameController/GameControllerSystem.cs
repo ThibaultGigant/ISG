@@ -178,8 +178,8 @@ public class GameControllerSystem : FSystem
 		con.orientation = con.target.transform.rotation.x * 180f - con.generator.checkPoints [currentCheckPointIndex].orientation;
 		Vector3 dirGravity = -con.target.transform.position.normalized;
 		Vector3 dirShuttle = con.target.transform.up.normalized;
-		con.earthOrientation = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
-			
+		float angle = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
+		con.earthOrientation = (angle > 180f) ? (angle - 360) : angle;
 	}
 
 	protected void updateAltitude (GameController con)
