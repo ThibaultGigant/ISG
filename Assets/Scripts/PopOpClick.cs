@@ -16,4 +16,12 @@ public class PopOpClick : MonoBehaviour
 	{
 		pop.display = false;
 	}
+
+	public void Menu(){
+		Debug.Log ("Menu");
+	}
+
+	public void Replay(){
+		Debug.Log ("Replay");
+	}
 }

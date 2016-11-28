@@ -5,4 +5,5 @@ public class WayPoint : MonoBehaviour {
 	public int id;
 	public bool last = false;
 	public float maxSpeed;
+	public float minSpeed;
 }

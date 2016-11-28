@@ -20,7 +20,10 @@ public class PopUpSystem : FSystem
 				go.SetActive (true);
 				Text title = go.transform.Find ("Title/Text").GetComponent<Text> ();
 				Text text = go.transform.Find ("Text/Text").GetComponent<Text> ();
+
+				if (pop.title != "")
 				title.text = pop.title;
+				if (pop.text != "")
 				text.text = pop.text;
 			}
 		}

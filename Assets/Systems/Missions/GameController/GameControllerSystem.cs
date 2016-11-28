@@ -14,6 +14,9 @@ public class GameControllerSystem : FSystem
 	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)), new AnyOfTags("Orientable"));
 
 
+	Family failure = FamilyManager.getFamily (new AnyOfTags("Failure"));
+	Family success = FamilyManager.getFamily (new AnyOfTags("Success"));
+
 	int currentCheckPointIndex = 0;
 
 	public GameControllerSystem ()
@@ -45,12 +48,25 @@ public class GameControllerSystem : FSystem
 			GameController con = go.GetComponent<GameController> ();
 			GameObject target = con.target;
 
+			if(con.done){
+				con.timer += Time.fixedDeltaTime;
+			}
+
+			if (con.timer > con.delay){
+				EndGame (con);
+			}
+
 			updateCurrentCheckPoint (con);
 			updateSpeedAndAcceleration (con);
 			updateGroundSpeed (con);
 			updateDrag (con);
 			updateOrientations (con);
 			updateAltitude (con);
+
+			if(con.done){
+				break;
+			}
+
 			CheckGFailure (con);
 			CheckDragFailure (con);
 			CheckDistanceFailure (con);
@@ -68,6 +84,32 @@ public class GameControllerSystem : FSystem
 			go.tag = "Untagged";
 		}
 	}
+
+	void EndGame(GameController con){
+	
+
+		Time.timeScale = 0f;
+
+		if(con.success){
+
+			foreach(GameObject go in success){
+				PopUpComponent pop = go.GetComponent<PopUpComponent> ();
+				pop.display = true;
+			}
+
+
+		}else{
+			foreach(GameObject go in failure){
+				PopUpComponent pop = go.GetComponent<PopUpComponent> ();
+				pop.display = true;
+				pop.text = con.failureText;
+			}
+		}
+
+
+		// App.Load(Menu);
+	}
+
 
 	protected void updateCurrentCheckPoint (GameController con)
 	{
@@ -100,7 +142,7 @@ public class GameControllerSystem : FSystem
 	protected void updateSpeedAndAcceleration (GameController con)
 	{
 		Rigidbody rb = con.target.GetComponent<Rigidbody> ();
-		con.speedQueue.Enqueue (rb.velocity.magnitude);
+		con.speedQueue.Enqueue (rb.velocity.magnitude * 36f);
 		con.accelerationQueue.Enqueue ((rb.velocity.magnitude - con.speed) * 9.81f);
 		con.speed = getQueueMean (con.speedQueue);
 		con.acceleration = getQueueMean (con.accelerationQueue);
@@ -148,20 +190,20 @@ public class GameControllerSystem : FSystem
 	protected void CheckGFailure (GameController con)
 	{
 		if (con.acceleration > con.GFailThreshold) {
-			Explode (con.target);
+			Explode (con.target, con, "Too much G !   "+con.acceleration);
 		}
 	}
 
 	protected void CheckDragFailure (GameController con)
 	{
 		if (con.drag > con.DragFailThreshold)
-			Explode (con.target);
+			Explode (con.target, con, "Too much drag !");
 	}
 
 	protected void CheckDistanceFailure (GameController con)
 	{
 		if (Vector3.Distance (con.target.transform.position, con.generator.checkPoints [currentCheckPointIndex].position) > con.maxTrajectoryDistance) {
-			Explode (con.target);
+			Explode (con.target, con, "You did not follow your flight plan.");
 		}
 	}
 
@@ -172,54 +214,74 @@ public class GameControllerSystem : FSystem
 			Rigidbody rb = go.GetComponent<Rigidbody> ();
 			Debug.Log (rb.velocity.magnitude);
 			if (rb.velocity.magnitude > con.MaxCollisionSpeed) {
-				Explode (go);
-				Debug.Log ("Explose");
+				Explode (go, con, "You were going too fast for landing !   "+(int)con.speed);
+
 			}
 		}
 	}
 
-	protected void Explode (GameObject go)
+	protected void Explode (GameObject go, GameController con, string text)
 	{
 		foreach (Largable largable in go.GetComponentsInChildren<Largable> ()) {
 			largable.toDrop = true;
 			largable.gameObject.tag = "Explosive";
 		}
+		Failure (con,text);
 	}
 
 	protected void CheckTriggers (GameController con) 
 	{
+
+
 		foreach (GameObject go in triggers) 
 		{
 			Triggered3D trig = go.GetComponent<Triggered3D> ();
 			GameObject wayPoint = trig.Targets [0];
 			WayPoint wp = wayPoint.GetComponent<WayPoint> ();
-			if (!con.checkedWayPoints.Contains (wp.id)) 
+			if (con.lastWayPoint + 1 == wp.id) 
 			{
+
 				if (con.speed > wp.maxSpeed) {
-					// Trop rapide, t'explose
-					// Explode (go);
-				} else {
-					con.checkedWayPoints.Add (wp.id);
+					Failure (con,"You were going too fast.      " +(int)con.speed);
+				} 
+				else if(con.speed < wp.minSpeed) {
+					Failure (con,"You were going too slow.      " +(int)con.speed);
 				}
-				if (wp.last) 
-				{
-					// Dernier waypoint, on vérifie si le joueur a passé tous les waypoints
-					bool win = true;
-					for (int i = 0; i < wp.id && win; i++) 
-					{
-						if (!con.checkedWayPoints.Contains (i)) 
-						{
-							win = false;
-						}
-					}
-					if (win) {
-						Debug.Log ("Win");
-					} else {
-						Debug.Log ("Failure");
-					}
+				else {
+					con.lastWayPoint++;
+				}
+			}
+			if (wp.last && con.lastWayPoint != 0) 
+			{
+				// Dernier waypoint, on vérifie si le joueur a passé tous les waypoints
+				bool win = con.lastWayPoint == wp.id;
+				if (win) {
+					Success (con);
+				} else {
+					Failure (con,"You did not follow your flight plan.");
 				}
 			}
 		}
+	}
+
+	public void Success(GameController con){
+		if(con.done){
+			return;
+		}
+
+		con.done = true;
+		con.success = true;
+
+		Debug.Log ("Success");
+	}
+
+	public void Failure(GameController con, string text){
+		if(con.done){
+			return;
+		}
+		con.failureText = text;
+		con.done = true;
+		Debug.Log ("Failure");
 	}
 
 

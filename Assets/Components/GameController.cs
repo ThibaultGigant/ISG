@@ -38,6 +38,14 @@ public class GameController : MonoBehaviour {
 	public float orientation;
 	public float earthOrientation;
 
-	public HashSet<int> checkedWayPoints = new HashSet<int>();
+	public int lastWayPoint;
+
+	public float delay = 2f;
+	public float timer;
+
+	public bool done;
+	public bool success;
+
+	public string failureText = "You're a Failure !";
 
 }
