@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: 4d3c3a22a68804667bda43c4154c44af
+timeCreated: 1480333556
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Coiffe
+    100004: Coiffe.001
+    100006: jupiterc10
+    100008: jupiterc11
+    100010: jupiterc12
+    100012: jupiterc13
+    100014: jupiterc14
+    100016: jupiterc15
+    100018: jupiterc16
+    100020: jupiterc_1
+    100022: jupiterc_2
+    100024: jupiterc_3
+    100026: jupiterc_4
+    100028: jupiterc_5
+    100030: jupiterc_6
+    100032: jupiterc_7
+    100034: jupiterc_8
+    100036: jupiterc_9
+    100038: jupiterc_c
+    100040: jupiterc_g
+    100042: Lamp
+    100044: pCube3 jup
+    100046: pCube5 ju1
+    100048: pCube5 jup
+    100050: pCylinder1
+    100052: pCylinder2
+    100054: pCylinder3
+    100056: //RootNode
+    400000: Camera
+    400002: Coiffe
+    400004: Coiffe.001
+    400006: jupiterc10
+    400008: jupiterc11
+    400010: jupiterc12
+    400012: jupiterc13
+    400014: jupiterc14
+    400016: jupiterc15
+    400018: jupiterc16
+    400020: jupiterc_1
+    400022: jupiterc_2
+    400024: jupiterc_3
+    400026: jupiterc_4
+    400028: jupiterc_5
+    400030: jupiterc_6
+    400032: jupiterc_7
+    400034: jupiterc_8
+    400036: jupiterc_9
+    400038: jupiterc_c
+    400040: jupiterc_g
+    400042: Lamp
+    400044: pCube3 jup
+    400046: pCube5 ju1
+    400048: pCube5 jup
+    400050: pCylinder1
+    400052: pCylinder2
+    400054: pCylinder3
+    400056: //RootNode
+    2300000: Coiffe
+    2300002: Coiffe.001
+    2300004: jupiterc10
+    2300006: jupiterc11
+    2300008: jupiterc12
+    2300010: jupiterc13
+    2300012: jupiterc14
+    2300014: jupiterc15
+    2300016: jupiterc16
+    2300018: jupiterc_1
+    2300020: jupiterc_2
+    2300022: jupiterc_3
+    2300024: jupiterc_4
+    2300026: jupiterc_5
+    2300028: jupiterc_6
+    2300030: jupiterc_7
+    2300032: jupiterc_8
+    2300034: jupiterc_9
+    2300036: jupiterc_g
+    2300038: pCube3 jup
+    2300040: pCube5 ju1
+    2300042: pCube5 jup
+    2300044: pCylinder1
+    2300046: pCylinder2
+    2300048: pCylinder3
+    3300000: Coiffe
+    3300002: Coiffe.001
+    3300004: jupiterc10
+    3300006: jupiterc11
+    3300008: jupiterc12
+    3300010: jupiterc13
+    3300012: jupiterc14
+    3300014: jupiterc15
+    3300016: jupiterc16
+    3300018: jupiterc_1
+    3300020: jupiterc_2
+    3300022: jupiterc_3
+    3300024: jupiterc_4
+    3300026: jupiterc_5
+    3300028: jupiterc_6
+    3300030: jupiterc_7
+    3300032: jupiterc_8
+    3300034: jupiterc_9
+    3300036: jupiterc_g
+    3300038: pCube3 jup
+    3300040: pCube5 ju1
+    3300042: pCube5 jup
+    3300044: pCylinder1
+    3300046: pCylinder2
+    3300048: pCylinder3
+    4300000: Coiffe.001
+    4300002: Coiffe
+    4300004: pCylinder3
+    4300006: pCylinder2
+    4300008: pCylinder1
+    4300010: pCube5 ju1
+    4300012: pCube5 jup
+    4300014: pCube3 jup
+    4300016: jupiterc16
+    4300018: jupiterc15
+    4300020: jupiterc14
+    4300022: jupiterc13
+    4300024: jupiterc12
+    4300026: jupiterc11
+    4300028: jupiterc10
+    4300030: jupiterc_9
+    4300032: jupiterc_8
+    4300034: jupiterc_7
+    4300036: jupiterc_6
+    4300038: jupiterc_5
+    4300040: jupiterc_4
+    4300042: jupiterc_3
+    4300044: jupiterc_2
+    4300046: jupiterc_1
+    4300048: jupiterc_g
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

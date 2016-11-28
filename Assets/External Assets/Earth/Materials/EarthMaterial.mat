@@ -72,7 +72,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 7229200f28cc7446d93ce197c6e7da4e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7dfcb90673cf9a44281e7da0b32902b2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -120,7 +120,7 @@ Material:
     m_Floats:
     - first:
         name: _AtmosFalloff
-      second: 64
+      second: 14
     - first:
         name: _BumpScale
       second: 1
@@ -129,7 +129,7 @@ Material:
       second: 0.5
     - first:
         name: _DetailIntensity
-      second: 0.03
+      second: 0
     - first:
         name: _DetailNormalMapScale
       second: 1
@@ -153,10 +153,10 @@ Material:
       second: 0
     - first:
         name: _NightIntensity
-      second: 1
+      second: 0.6
     - first:
         name: _NightTransitionVariable
-      second: 1
+      second: 4
     - first:
         name: _OcclusionStrength
       second: 1
@@ -165,16 +165,16 @@ Material:
       second: 0.02
     - first:
         name: _RimPower
-      second: 64
+      second: 16
     - first:
         name: _Shininess
       second: 0.03
     - first:
         name: _Smoothness
-      second: 0
+      second: 0.6
     - first:
         name: _SpecularPower
-      second: 0
+      second: 1
     - first:
         name: _SrcBlend
       second: 1

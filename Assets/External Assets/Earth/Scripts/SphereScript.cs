@@ -54,7 +54,7 @@ namespace DigitalRuby.Earth
             }
         }
 
-        [Range(0.1f, 6371000.0f)]
+        [Range(0.1f, 63710.0f)]
         [Tooltip("Sphere Radius")]
         public float Radius = 20.0f;
 
