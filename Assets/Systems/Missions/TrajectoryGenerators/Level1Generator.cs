@@ -19,7 +19,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 
 		while (PhysicsConstants.GetAltitude (last.position) < generator.targetAscensionHeight && count < max) {
 
-			float newAcceleration = last.acceleration >= generator.targetG ? generator.targetG: (last.acceleration + generator.targetG * generator.stepDuration / 10);
+			float newAcceleration = last.acceleration >= generator.targetG ? generator.targetG : (last.acceleration + generator.targetG * generator.stepDuration / 10);
 			float newSpeed = last.speed + generator.stepDuration * newAcceleration;
 			Vector3 newPosition = last.position + Vector3.up * newSpeed * generator.stepDuration;
 
@@ -45,7 +45,7 @@ public class Level1Generator : TrajectoryGeneratorSystem
 		int max = 10000;
 		int count = 1;
 
-		float constante = 1f;
+		float constante = .5f;
 		constante *= generator.stepDuration;
 
 		while (last.orientation < generator.targetAlignmentOrientation && count < max) {
