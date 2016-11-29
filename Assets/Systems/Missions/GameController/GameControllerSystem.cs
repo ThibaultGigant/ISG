@@ -43,6 +43,14 @@ public class GameControllerSystem : FSystem
 
 	protected override void onProcess (int familiesUpdateCount)
 	{
+		foreach (GameObject go in explosives) {
+			Rigidbody rb = go.GetComponent<Rigidbody> ();
+			rb.useGravity = false;
+			rb.AddExplosionForce (rb.mass * rb.mass, rb.position, 1);
+			GameObject explo = GameObjectManager.instantiatePrefab ("FireExplosion");
+			explo.transform.position = rb.position;
+			go.tag = "Untagged";
+		}
 
 		foreach (GameObject go in controllers) {
 			GameController con = go.GetComponent<GameController> ();
@@ -75,14 +83,7 @@ public class GameControllerSystem : FSystem
 			CheckTriggers (con);
 		}
 
-		foreach (GameObject go in explosives) {
-			Rigidbody rb = go.GetComponent<Rigidbody> ();
-			rb.useGravity = false;
-			rb.AddExplosionForce (rb.mass * rb.mass, rb.position, 1);
-			GameObject explo = GameObjectManager.instantiatePrefab ("FireExplosion");
-			explo.transform.position = rb.position;
-			go.tag = "Untagged";
-		}
+
 	}
 
 	void EndGame(GameController con){
@@ -229,6 +230,7 @@ public class GameControllerSystem : FSystem
 
 	protected void Explode (GameObject go, GameController con, string text)
 	{
+		go.tag = "Explosive";
 		foreach (Largable largable in go.GetComponentsInChildren<Largable> ()) {
 			largable.toDrop = true;
 			largable.gameObject.tag = "Explosive";
