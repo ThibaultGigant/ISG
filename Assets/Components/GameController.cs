@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
 	public float GFailThreshold;
 	public float GFailThresholdDuration;
 
+	public float timerG;
+
 	public float DragAlertThreshold;
 	public float DragFailThreshold;
 

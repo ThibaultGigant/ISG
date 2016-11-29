@@ -142,8 +142,8 @@ public class GameControllerSystem : FSystem
 	protected void updateSpeedAndAcceleration (GameController con)
 	{
 		Rigidbody rb = con.target.GetComponent<Rigidbody> ();
-		con.speedQueue.Enqueue (rb.velocity.magnitude * 36f);
-		con.accelerationQueue.Enqueue ((rb.velocity.magnitude - con.speed) * 9.81f);
+		con.speedQueue.Enqueue (rb.velocity.magnitude * 3.6f * 9.81f);
+		con.accelerationQueue.Enqueue ((rb.velocity.magnitude * 3.6f * 9.81f - con.speed) );
 		con.speed = getQueueMean (con.speedQueue);
 		con.acceleration = getQueueMean (con.accelerationQueue);
 
@@ -189,7 +189,14 @@ public class GameControllerSystem : FSystem
 
 	protected void CheckGFailure (GameController con)
 	{
-		if (con.acceleration > con.GFailThreshold) {
+
+		if (con.acceleration>con.GFailThreshold){
+			con.timerG += 1f / con.GFailThresholdDuration * Time.fixedDeltaTime;
+		}else{
+			con.timerG = 0f;
+		}
+
+		if (con.timerG > 1f) {
 			Explode (con.target, con, "Too much G !   "+con.acceleration);
 		}
 	}
@@ -210,12 +217,13 @@ public class GameControllerSystem : FSystem
 	protected void CheckCollision (GameController con)
 	{
 		foreach (GameObject go in collisions) {
+			foreach(GameObject collided in go.GetComponent<InCollision3D> ().Targets){
+				Rigidbody rb = collided.GetComponentInParent<Rigidbody> ();
+				Debug.Log (rb.velocity.magnitude);
+				if (rb.velocity.magnitude * 3.6 * 9.81f > con.MaxCollisionSpeed) {
+					Explode (collided, con, "You were going too fast for landing !   "+(int)con.speed);
 
-			Rigidbody rb = go.GetComponent<Rigidbody> ();
-			Debug.Log (rb.velocity.magnitude);
-			if (rb.velocity.magnitude > con.MaxCollisionSpeed) {
-				Explode (go, con, "You were going too fast for landing !   "+(int)con.speed);
-
+				}
 			}
 		}
 	}

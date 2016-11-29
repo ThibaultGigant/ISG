@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using FYFY;
+using System;
 
 public class TrackingPanelSystem : FSystem
 {
@@ -59,7 +60,8 @@ public class TrackingPanelSystem : FSystem
 				Image orientationAlert = go.transform.Find ("PanelOrientation2/Panel").GetComponent<Image> ();
 
 				Text affichageDegres = go.transform.Find ("PanelOrientation2/Affichage/Text").GetComponent<Text> ();
-
+				Text affichageG = go.transform.Find ("PanelG/Affichage/Text").GetComponent<Text> ();
+				Text affichageDrag = go.transform.Find ("PanelDrag/Affichage/Text").GetComponent<Text> ();
 
 
 				//@@@@@@@@@@@@@@@@@@
@@ -106,15 +108,12 @@ public class TrackingPanelSystem : FSystem
 
 				tp.GQueue.Enqueue (gc.acceleration);
 				sliderG.value = getQueueMean (tp.GQueue);
-				/*tp.lastVelocity = lastVelocity;
-				sliderOrientaion.value = tp.target.transform.rotation.x * 180 - tp.trajectory.checkPoints [bestIndex].orientation;*/
+				affichageG.text =  sliderG.value.ToString ("F2")+" G";
 
-				dragSlider.value = Mathf.Log (gc.drag);
-				/*Vector3 dirGravity = (tp.earth.transform.position - rocket.transform.position).normalized;
-				Vector3 dirShuttle = rocket.transform.up.normalized;
-				float angle = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
-				orientationSlider.value = (angle > 180f) ? (angle - 360) : angle;
-				affichageDegres.text = orientationSlider.value.ToString ("###0") + "°";*/
+
+				dragSlider.value = Mathf.Sqrt (gc.drag);
+				affichageDrag.text = dragSlider.value.ToString ("F2")+" G";
+
 				orientationSlider.value = gc.earthOrientation;
 				affichageDegres.text = orientationSlider.value.ToString ("###0") + "°";
 
