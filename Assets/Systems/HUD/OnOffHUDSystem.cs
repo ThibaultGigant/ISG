@@ -19,8 +19,18 @@ public class OnOffHUDSystem : FSystem {
 	protected override void onProcess(int familiesUpdateCount) {
 		foreach (GameObject go in onOffButtons) {
 			Slider slider = go.GetComponentInChildren<Slider> ();
-			if (slider.value == 1)
+			if (slider.value == 1) {
 				go.GetComponent<ToggleHUDComponent> ().propulseur.isOn = true;
+				/*
+				foreach (Largable checkIfDropped in go.GetComponent<ToggleHUDComponent>().dropBeforeIgnite) {
+					if (checkIfDropped.toDrop == false) {
+						go.GetComponent<ToggleHUDComponent>().propulseur.gameObject.tag = "Explosive";
+						GameObjectManager.addComponent<Rigidbody> (go.GetComponent<ToggleHUDComponent>().propulseur.gameObject);
+						checkIfDropped.toDrop = true;
+					}
+				}
+				*/
+			}
 			else
 				go.GetComponent<ToggleHUDComponent> ().propulseur.isOn = false;
 		}

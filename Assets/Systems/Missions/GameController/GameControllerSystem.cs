@@ -8,7 +8,7 @@ public class GameControllerSystem : FSystem
 
 	Family controllers = FamilyManager.getFamily (new AllOfComponents (typeof(GameController)));
 
-	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(Rigidbody), typeof(InCollision3D)));
+	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(InCollision3D)));
 	Family explosives = FamilyManager.getFamily (new AnyOfTags ("Explosive"), new AllOfComponents (typeof(Rigidbody)));
 
 	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)));
@@ -219,7 +219,6 @@ public class GameControllerSystem : FSystem
 		foreach (GameObject go in collisions) {
 			foreach(GameObject collided in go.GetComponent<InCollision3D> ().Targets){
 				Rigidbody rb = collided.GetComponentInParent<Rigidbody> ();
-				Debug.Log (rb.velocity.magnitude);
 				if (rb.velocity.magnitude * 3.6 * 9.81f > con.MaxCollisionSpeed) {
 					Explode (collided, con, "You were going too fast for landing !   "+(int)con.speed);
 
