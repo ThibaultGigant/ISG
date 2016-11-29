@@ -242,27 +242,34 @@ public class GameControllerSystem : FSystem
 		foreach (GameObject go in triggers) 
 		{
 			WayPoint wp = go.GetComponent<WayPoint> ();
-			if (con.lastWayPoint + 1 == wp.id) 
-			{
-
-				if (con.speed > wp.maxSpeed) {
-					Failure (con,"You were going too fast.      " +(int)con.speed);
-				} 
-				else if(con.speed < wp.minSpeed) {
-					Failure (con,"You were going too slow.      " +(int)con.speed);
-				}
-				else {
-					con.lastWayPoint++;
+			Triggered3D trig = wp.GetComponent<Triggered3D> ();
+			bool orientable = false;
+			foreach (GameObject test in trig.Targets) {
+				if(test.CompareTag("Orientable") || test.CompareTag("Trigger"))
+				{
+					orientable = true;
 				}
 			}
-			if (wp.last && con.lastWayPoint != 0) 
-			{
-				// Dernier waypoint, on vérifie si le joueur a passé tous les waypoints
-				bool win = con.lastWayPoint == wp.id;
-				if (win) {
-					Success (con);
-				} else {
-					Failure (con,"You did not follow your flight plan.");
+
+			if (orientable) {
+				if (con.lastWayPoint + 1 == wp.id) {
+
+					if (con.speed > wp.maxSpeed) {
+						Failure (con, "You were going too fast. " + (int)con.speed);
+					} else if (con.speed < wp.minSpeed) {
+						Failure (con, "You were going too slow. " + (int)con.speed);
+					} else {
+						con.lastWayPoint++;
+					}
+				}
+				if (wp.last && con.lastWayPoint != 0) {
+					// Dernier waypoint, on vérifie si le joueur a passé tous les waypoints
+					bool win = con.lastWayPoint == wp.id;
+					if (win) {
+						Success (con);
+					} else {
+						Failure (con, "You did not follow your flight plan.");
+					}
 				}
 			}
 		}
@@ -285,7 +292,7 @@ public class GameControllerSystem : FSystem
 		}
 		con.failureText = text;
 		con.done = true;
-		Debug.Log ("Failure");
+		Debug.Log ("Failure : " + text);
 	}
 
 

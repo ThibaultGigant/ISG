@@ -16,6 +16,7 @@ TagManager:
   - NonExplosive
   - Failure
   - Success
+  - Trigger
   layers:
   - Default
   - TransparentFX
