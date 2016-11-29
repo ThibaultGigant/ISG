@@ -20,6 +20,15 @@ public class IgniteHUDSystem : FSystem {
 		foreach (GameObject go in igniteButtons) {
 			Slider slider = go.GetComponentInChildren<Slider> ();
 			if (slider.value == 1) {
+				/*
+				foreach (Largable checkIfDropped in go.GetComponent<IgniteHUDComponent>().dropBeforeIgnite) {
+					if (checkIfDropped.toDrop == false) {
+						go.tag = "Explosive";
+						GameObjectManager.addComponent<Rigidbody> (go.GetComponent<IgniteHUDComponent>().propulseurs[0].gameObject);
+						checkIfDropped.toDrop = true;
+					}
+				}
+				*/
 				foreach (Propulseur prop in go.GetComponent<IgniteHUDComponent>().propulseurs) {
 					prop.isOn = true;
 				}
