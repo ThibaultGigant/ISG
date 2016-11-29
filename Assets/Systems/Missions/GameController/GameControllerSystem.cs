@@ -11,7 +11,7 @@ public class GameControllerSystem : FSystem
 	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(Rigidbody), typeof(InCollision3D)));
 	Family explosives = FamilyManager.getFamily (new AnyOfTags ("Explosive"), new AllOfComponents (typeof(Rigidbody)));
 
-	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)), new AnyOfTags("Orientable"));
+	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)));
 
 
 	Family failure = FamilyManager.getFamily (new AnyOfTags("Failure"));
@@ -56,16 +56,16 @@ public class GameControllerSystem : FSystem
 				EndGame (con);
 			}
 
+			if(con.done){
+				break;
+			}
+
 			updateCurrentCheckPoint (con);
 			updateSpeedAndAcceleration (con);
 			updateGroundSpeed (con);
 			updateDrag (con);
 			updateOrientations (con);
 			updateAltitude (con);
-
-			if(con.done){
-				break;
-			}
 
 			CheckGFailure (con);
 			CheckDragFailure (con);
@@ -239,13 +239,9 @@ public class GameControllerSystem : FSystem
 
 	protected void CheckTriggers (GameController con) 
 	{
-
-
 		foreach (GameObject go in triggers) 
 		{
-			Triggered3D trig = go.GetComponent<Triggered3D> ();
-			GameObject wayPoint = trig.Targets [0];
-			WayPoint wp = wayPoint.GetComponent<WayPoint> ();
+			WayPoint wp = go.GetComponent<WayPoint> ();
 			if (con.lastWayPoint + 1 == wp.id) 
 			{
 

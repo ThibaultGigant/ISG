@@ -201,27 +201,27 @@ Prefab:
     - target: {fileID: 224000010384853812, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 224000010384853812, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224000010551319976, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 224000010551319976, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 224000010551319976, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224000012034739604, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
         type: 2}
@@ -312,6 +312,36 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010182753776, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: initialFuel
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010182753776, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: currentFuel
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014197817070, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: m_MinValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010182753776, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: consumption
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012878256778, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: GAlertThreshold
+      value: 5.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012878256778, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: GFailThreshold
+      value: 5.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7, type: 2}
@@ -607,7 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   last: 0
-  maxSpeed: 100000
+  maxSpeed: 1000
   minSpeed: 0
 --- !u!65 &627014990
 BoxCollider:
@@ -992,10 +1022,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 797595972}
-  m_LocalRotation: {x: 0.43720508, y: -0, z: -0, w: 0.8993619}
-  m_LocalPosition: {x: 0, y: -25989, z: 51346}
-  m_LocalScale: {x: 225, y: 2.0000014, z: 225}
-  m_LocalEulerAnglesHint: {x: 51.844, y: 0, z: 0}
+  m_LocalRotation: {x: 0.38895965, y: -0.010077025, z: -0.001155021, w: 0.92119896}
+  m_LocalPosition: {x: 0, y: -19297, z: 45658}
+  m_LocalScale: {x: 225, y: 0.1, z: 225}
+  m_LocalEulerAnglesHint: {x: 45.77, y: -1.552, z: -0.795}
   m_Children: []
   m_Father: {fileID: 1987732987}
   m_RootOrder: 6
@@ -1010,7 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba9fdbc8a74b784c93ede04c8e4c9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 6
+  id: 7
   last: 1
   maxSpeed: 100
   minSpeed: 0
@@ -1412,7 +1442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba9fdbc8a74b784c93ede04c8e4c9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 4
+  id: 5
   last: 0
   maxSpeed: 100000
   minSpeed: 0
@@ -1554,7 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba9fdbc8a74b784c93ede04c8e4c9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 5
+  id: 6
   last: 0
   maxSpeed: 100000
   minSpeed: 0
