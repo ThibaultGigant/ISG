@@ -203,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012402257594
 GameObject:
   m_ObjectHideFlags: 1
@@ -363,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013772269072
 GameObject:
   m_ObjectHideFlags: 1
@@ -1212,17 +1212,18 @@ MonoBehaviour:
     you get to drive our powerfull rockets, we need to make sure you know how to land
     them.  \n\nAs you remember, the main component of a rocket is the Capsule, it
     is where the astronauts  take place and command the rocket, and where all the
-    vital systems are.   The Capsule, a Gemini type  in this case, is not a single
-    control room, but an entire spacecraft on itself, compose of many part.  Today
-    you will learn how to use the Escape Tower and the Landing System.  Your mission
-    consist of the following steps : \n\n  \t- First, use the Escape Tower to propel
-    the Capsule far above the launchpad. \t- Then, use the parachutes and the retro
-    rockets to land softly on the ground.  The mission will be a success if you touch
-    the ground with a speed lower than X km/h, otherwise, the Capsule will not handle
-    the collision and probably explode with you on it. But don't worry ! You are not
-    the only one who applied for the job.  Tips :   \t- You better jettison the Escape
-    Tower once it is empty, it will make your \t\tspace craft lighter for the landing.
-    \t- Keep the Capsule oriented or your retro rockets won't help you."
+    vital systems are.  The Capsule, a Gemini type  in this case, is not a single
+    control room, but an entire spacecraft on itself, compose of many part. \nToday
+    you will learn how to use the Escape Tower and the Landing System.\n\nYour mission
+    consist of the following steps : \n\n- First, use the Escape Tower to propel the
+    Capsule far above the launchpad. \n\n- Then, use the parachutes and the retro
+    rockets to land softly on the ground.  \n\nThe mission will be a success if you
+    touch the ground with a speed lower than X km/h, otherwise, the Capsule will not
+    handle the collision and probably explode with you on it.\n\nBut don't worry !
+    You are not the only one who applied for the job.  \n\nTips :   \t\n\n- You better
+    jettison the Escape Tower once it is empty, it will make your  space craft lighter
+    for the landing. \t\n\n- Keep the Capsule oriented or your retro rockets won't
+    help you."
 --- !u!114 &114000012877717034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2099,10 +2100,10 @@ RectTransform:
   - {fileID: 224000014068969798}
   m_Father: {fileID: 224000013567305688}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -31.8}
-  m_SizeDelta: {x: 350, y: 28.6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 121}
+  m_SizeDelta: {x: 584, y: 109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000014068969798
 RectTransform:
@@ -2119,8 +2120,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: -32}
-  m_SizeDelta: {x: 569, y: 93}
+  m_AnchoredPosition: {x: 0.000030518, y: 0}
+  m_SizeDelta: {x: 584, y: 109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000014266565246
 RectTransform:
