@@ -212,13 +212,13 @@ public class GameControllerSystem : FSystem
 			foreach (GameObject test in trig.Targets) {
 				if(test.CompareTag("Orientable") || test.CompareTag("Trigger"))
 				{
+					Debug.Log ("Waypoint n°" + wp.id + " triggered by : " + test);
 					orientable = true;
 				}
 			}
 
 			if (orientable) {
 				if (con.lastWayPoint + 1 == wp.id) {
-
 					if (con.speed > wp.maxSpeed) {
 						Failure (con, "You were going too fast. " + (int)con.speed);
 					} else if (con.speed < wp.minSpeed) {
