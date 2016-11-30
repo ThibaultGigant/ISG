@@ -23,7 +23,8 @@ public class ParachuteSystem : FSystem {
 			if(p.on){
 
 				rb.drag += p.drag * Mathf.Sqrt (Mathf.Max (0, PhysicsConstants.atmosphereEnd - PhysicsConstants.GetAltitude (rb.position)));
-				go.transform.rotation = Quaternion.Slerp (go.transform.rotation, Quaternion.LookRotation (-rb.velocity), Time.fixedDeltaTime);
+				if (PhysicsConstants.GetAltitude(rb.position) < PhysicsConstants.atmosphereEnd)
+					go.transform.rotation = Quaternion.Slerp (go.transform.rotation, Quaternion.LookRotation (-rb.velocity), Time.fixedDeltaTime);
 
 				if(rb.drag > p.breakForce ){
 					GameObjectManager.removeComponent<Parachute> (go);

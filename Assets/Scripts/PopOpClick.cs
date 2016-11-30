@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PopOpClick : MonoBehaviour
 {
@@ -23,5 +24,6 @@ public class PopOpClick : MonoBehaviour
 
 	public void Replay(){
 		Debug.Log ("Replay");
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

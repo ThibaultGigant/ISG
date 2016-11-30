@@ -56,6 +56,7 @@ GameObject:
   - 135: {fileID: 135000010133644870}
   - 114: {fileID: 114000013466134258}
   - 114: {fileID: 114000010122731218}
+  - 114: {fileID: 114000012586232854}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -872,6 +873,17 @@ MonoBehaviour:
   target: {fileID: 0}
   mass: 7.34
   exposant: 22
+--- !u!114 &114000012586232854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010462142088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1215312603, guid: 209802f240e3ff2429d7de1d85546844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013236257318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -992,7 +1004,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -1800449451
+  randomSeed: 548095525
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2726,7 +2738,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: 1489733833
+  randomSeed: 206131698
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -4432,7 +4444,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedWireframeHidden: 1
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

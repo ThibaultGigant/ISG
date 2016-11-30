@@ -2,13 +2,14 @@
 using FYFY;
 using FYFY_plugins.CollisionManager;
 using FYFY_plugins.TriggerManager;
+using System;
 
 public class GameControllerSystem : FSystem
 {
 
 	Family controllers = FamilyManager.getFamily (new AllOfComponents (typeof(GameController)));
 
-	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(InCollision3D)));
+	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(InCollision3D)), new AnyOfTags("Orientable"));
 	Family explosives = FamilyManager.getFamily (new AnyOfTags ("Explosive"), new AllOfComponents (typeof(Rigidbody)));
 
 	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)));
@@ -198,7 +199,7 @@ public class GameControllerSystem : FSystem
 		}
 
 		if (con.timerG > 1f) {
-			Explode (con.target, con, "Too much G !   "+con.acceleration);
+			Explode (con.target, con, "Too much acceleration ! Your G counter was: "+ String.Format ("{0:0.00}", con.acceleration));
 		}
 	}
 
@@ -221,7 +222,7 @@ public class GameControllerSystem : FSystem
 			foreach(GameObject collided in go.GetComponent<InCollision3D> ().Targets){
 				Rigidbody rb = collided.GetComponentInParent<Rigidbody> ();
 				if (rb.velocity.magnitude * 3.6 * 9.81f > con.MaxCollisionSpeed) {
-					Explode (collided, con, "You were going too fast for landing !   "+(int)con.speed);
+					Explode (collided, con, "You were going too fast for landing !   "+String.Format("{0:0.00}", con.speed));
 
 				}
 			}

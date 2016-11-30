@@ -24,7 +24,7 @@ public class OnOffHUDSystem : FSystem {
 				/*
 				foreach (Largable checkIfDropped in go.GetComponent<ToggleHUDComponent>().dropBeforeIgnite) {
 					if (checkIfDropped.toDrop == false) {
-						go.GetComponent<ToggleHUDComponent>().propulseur.gameObject.tag = "Explosive";
+						checkIfDropped.GetComponentInParent<Rigidbody>().gameObject.tag = "Explosive";
 						GameObjectManager.addComponent<Rigidbody> (go.GetComponent<ToggleHUDComponent>().propulseur.gameObject);
 						checkIfDropped.toDrop = true;
 					}
