@@ -24800,7 +24800,7 @@ MonoBehaviour:
   on: 0
   release: 0
   breakForce: 10
-  drag: 0.0025
+  drag: 0.02
 --- !u!114 &114000013536630414
 MonoBehaviour:
   m_ObjectHideFlags: 1

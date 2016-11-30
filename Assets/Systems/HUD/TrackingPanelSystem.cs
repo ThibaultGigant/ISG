@@ -59,7 +59,7 @@ public class TrackingPanelSystem : FSystem
 
 				tp.GQueue.Enqueue (gc.acceleration);
 				sliderG.value = Mathf.Abs(getQueueMean (tp.GQueue));
-				affichageG.text =  Mathf.Abs(getQueueMean (tp.GQueue)).ToString ("F2")+" G";
+				affichageG.text =  ((getQueueMean(tp.GQueue) >= 0)?" ":"-")+ Mathf.Abs(getQueueMean (tp.GQueue)).ToString ("F2")+" G";
 
 
 				dragSlider.value = Mathf.Sqrt (gc.drag);
