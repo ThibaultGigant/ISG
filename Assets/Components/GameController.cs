@@ -5,10 +5,7 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
 	public GameObject target;
-	public TrajectoryGenerator generator;
 	public GameObject prefabExplosion;
-
-	public float maxTrajectoryDistance;
 
 
 	public float GAlertThreshold;

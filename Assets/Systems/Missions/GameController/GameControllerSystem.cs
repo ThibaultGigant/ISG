@@ -115,30 +115,7 @@ public class GameControllerSystem : FSystem
 
 	protected void updateCurrentCheckPoint (GameController con)
 	{
-		int bestIndex = currentCheckPointIndex;
-
-		float bestDistance = Vector3.Distance (con.generator.checkPoints [bestIndex].position, con.target.transform.position);
-		int temp = Mathf.Min (bestIndex + 1, con.generator.checkPoints.Count - 1);
-		float tempDistance = Vector3.Distance (con.generator.checkPoints [temp].position, con.target.transform.position);
-
-
-		while (temp < con.generator.checkPoints.Count - 1 && tempDistance < bestDistance) {
-			bestIndex = temp;
-			bestDistance = tempDistance;
-			temp++;
-			tempDistance = Vector3.Distance (con.generator.checkPoints [temp].position, con.target.transform.position);
-		}
-
-		temp = (int)Mathf.Max (bestIndex - 1, 0);
-		tempDistance = Vector3.Distance (con.generator.checkPoints [temp].position, con.target.transform.position);
-		while (temp > 0 && tempDistance < bestDistance) {
-			bestIndex = temp;
-			bestDistance = tempDistance;
-			temp++;
-			tempDistance = Vector3.Distance (con.generator.checkPoints [temp].position, con.target.transform.position);
-		}
-		currentCheckPointIndex = bestIndex;
-
+		// TODO : A retirer ?
 	}
 
 	protected void updateSpeedAndAcceleration (GameController con)
@@ -177,7 +154,6 @@ public class GameControllerSystem : FSystem
 	protected void updateOrientations (GameController con)
 	{
 		Rigidbody rb = con.target.GetComponent<Rigidbody> ();
-		con.orientation = con.target.transform.rotation.x * 180f - con.generator.checkPoints [currentCheckPointIndex].orientation;
 		Vector3 dirGravity = -con.target.transform.position.normalized;
 		Vector3 dirShuttle = con.target.transform.up.normalized;
 		float angle = Vector3.Angle (dirShuttle, dirGravity) * Mathf.Sign (Vector3.Cross (dirGravity, dirShuttle).x) + 180f;
@@ -211,9 +187,7 @@ public class GameControllerSystem : FSystem
 
 	protected void CheckDistanceFailure (GameController con)
 	{
-		if (Vector3.Distance (con.target.transform.position, con.generator.checkPoints [currentCheckPointIndex].position) > con.maxTrajectoryDistance) {
-			Explode (con.target, con, "You did not follow your flight plan.");
-		}
+		//TODO : A retirer ?
 	}
 
 	protected void CheckCollision (GameController con)
