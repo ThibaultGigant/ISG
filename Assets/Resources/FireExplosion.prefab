@@ -244,8 +244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 0}
   StartTime: 0.25
-  StopTime: 0.75
-  Duration: 0.7
+  StopTime: 5
+  Duration: 4.7
   ForceAmount: 2500
   ForceRadius: 10
   IsProjectile: 1

@@ -20,16 +20,19 @@ public class OnOffHUDSystem : FSystem {
 		foreach (GameObject go in onOffButtons) {
 			Slider slider = go.GetComponentInChildren<Slider> ();
 			if (slider.value == 1) {
-				go.GetComponent<ToggleHUDComponent> ().propulseur.isOn = true;
-				/*
+
 				foreach (Largable checkIfDropped in go.GetComponent<ToggleHUDComponent>().dropBeforeIgnite) {
 					if (checkIfDropped.toDrop == false) {
 						checkIfDropped.GetComponentInParent<Rigidbody>().gameObject.tag = "Explosive";
-						GameObjectManager.addComponent<Rigidbody> (go.GetComponent<ToggleHUDComponent>().propulseur.gameObject);
 						checkIfDropped.toDrop = true;
+						GameControllerSystem.Explode(checkIfDropped.GetComponentInParent<Rigidbody>().gameObject,
+							"You have engaged " + go.GetComponent<ToggleHUDComponent> ().propulseur.gameObject.name + 
+							" before having jettisoned " + checkIfDropped.gameObject.name);
 					}
 				}
-				*/
+
+				go.GetComponent<ToggleHUDComponent> ().propulseur.isOn = true;
+
 			}
 			else
 				go.GetComponent<ToggleHUDComponent> ().propulseur.isOn = false;

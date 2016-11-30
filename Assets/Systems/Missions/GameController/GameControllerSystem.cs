@@ -18,7 +18,7 @@ public class GameControllerSystem : FSystem
 	Family failure = FamilyManager.getFamily (new AnyOfTags("Failure"));
 	Family success = FamilyManager.getFamily (new AnyOfTags("Success"));
 
-	int currentCheckPointIndex = 0;
+	public static GameController controller;
 
 	public GameControllerSystem ()
 	{
@@ -29,6 +29,7 @@ public class GameControllerSystem : FSystem
 			con.groundSpeedQueue = new LimitedQueue<float> (con.memory);
 			con.altitudeQueue = new LimitedQueue<float> (con.memory);
 			con.dragQueue = new LimitedQueue<float> (con.memory);
+			controller = con;
 		}
 
 
@@ -46,7 +47,7 @@ public class GameControllerSystem : FSystem
 	{
 		foreach (GameObject go in explosives) {
 			Rigidbody rb = go.GetComponent<Rigidbody> ();
-			rb.useGravity = false;
+			//rb.useGravity = false;
 			rb.AddExplosionForce (rb.mass * rb.mass, rb.position, 1);
 			GameObject explo = GameObjectManager.instantiatePrefab ("FireExplosion");
 			explo.transform.position = rb.position;
@@ -167,14 +168,14 @@ public class GameControllerSystem : FSystem
 		}
 
 		if (con.timerG > 1f) {
-			Explode (con.target, con, "Too much acceleration ! Your G counter was: "+ String.Format ("{0:0.00}", con.acceleration));
+			Explode (con.target, "Too much acceleration ! Your G counter was: "+ String.Format ("{0:0.00}", con.acceleration));
 		}
 	}
 
 	protected void CheckDragFailure (GameController con)
 	{
 		if (con.drag > con.DragFailThreshold)
-			Explode (con.target, con, "Too much drag !");
+			Explode (con.target, "Too much drag !");
 	}
 
 	protected void CheckCollision (GameController con)
@@ -183,21 +184,22 @@ public class GameControllerSystem : FSystem
 			foreach(GameObject collided in go.GetComponent<InCollision3D> ().Targets){
 				Rigidbody rb = collided.GetComponentInParent<Rigidbody> ();
 				if (rb.velocity.magnitude * 3.6 * 9.81f > con.MaxCollisionSpeed) {
-					Explode (collided, con, "You were going too fast for landing !   "+String.Format("{0:0.00}", con.speed));
+					Explode (collided, "You were going too fast for landing !   "+String.Format("{0:0.00}", con.speed));
 
 				}
 			}
 		}
 	}
 
-	protected void Explode (GameObject go, GameController con, string text)
+	public static void Explode (GameObject go, string text)
 	{
+		Debug.Log ("Explosion de : " + go.gameObject.name);
 		go.tag = "Explosive";
 		foreach (Largable largable in go.GetComponentsInChildren<Largable> ()) {
 			largable.toDrop = true;
 			largable.gameObject.tag = "Explosive";
 		}
-		Failure (con,text);
+		Failure (getGameController() ,text);
 	}
 
 	protected void CheckTriggers (GameController con) 
@@ -238,7 +240,7 @@ public class GameControllerSystem : FSystem
 		}
 	}
 
-	public void Success(GameController con){
+	public static void Success(GameController con){
 		if(con.done){
 			return;
 		}
@@ -249,7 +251,7 @@ public class GameControllerSystem : FSystem
 		Debug.Log ("Success");
 	}
 
-	public void Failure(GameController con, string text){
+	public static void Failure(GameController con, string text){
 		if(con.done){
 			return;
 		}
@@ -270,6 +272,11 @@ public class GameControllerSystem : FSystem
 		}
 
 		return res /= q.Count;
+	}
+
+	public static GameController getGameController()
+	{
+		return controller;
 	}
 
 }
