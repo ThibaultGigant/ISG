@@ -19,15 +19,11 @@ public class TrackingPanelSystem : FSystem
 				TrackingPanel tp = go.GetComponent<TrackingPanel> ();
 
 				Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
-				Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
 				Slider dragSlider = go.transform.Find ("PanelDrag/DragSlider").GetComponent<Slider> ();
 
 				tp.GQueue = new LimitedQueue<float> (tp.memory);
 
 				sliderG.maxValue = tp.GRange;
-
-				sliderOrientaion.minValue = -tp.rotRange / 2;
-				sliderOrientaion.maxValue = tp.rotRange / 2;
 
 				dragSlider.maxValue = tp.dragRange;
 			}
@@ -50,65 +46,20 @@ public class TrackingPanelSystem : FSystem
 
 				TrackingPanel tp = go.GetComponent<TrackingPanel> ();
 				Slider sliderG = go.transform.Find ("PanelG/GSlider").GetComponent<Slider> ();
-				Slider sliderOrientaion = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
 				Slider dragSlider = go.transform.Find ("PanelDrag/DragSlider").GetComponent<Slider> ();
-				Slider orientationSlider = go.transform.Find ("PanelOrientation2/OrientationSlider").GetComponent<Slider> ();
+				Slider orientationSlider = go.transform.Find ("PanelOrientation/OrientationSlider").GetComponent<Slider> ();
 
 				Image GAlert = go.transform.Find ("PanelG/Panel").GetComponent<Image> ();
-				Image RotAlert = go.transform.Find ("PanelOrientation/Panel").GetComponent<Image> ();
 				Image DragAlert = go.transform.Find ("PanelDrag/Panel").GetComponent<Image> ();
-				Image orientationAlert = go.transform.Find ("PanelOrientation2/Panel").GetComponent<Image> ();
+				Image orientationAlert = go.transform.Find ("PanelOrientation/Panel").GetComponent<Image> ();
 
-				Text affichageDegres = go.transform.Find ("PanelOrientation2/Affichage/Text").GetComponent<Text> ();
+				Text affichageDegres = go.transform.Find ("PanelOrientation/Affichage/Text").GetComponent<Text> ();
 				Text affichageG = go.transform.Find ("PanelG/Affichage/Text").GetComponent<Text> ();
 				Text affichageDrag = go.transform.Find ("PanelDrag/Affichage/Text").GetComponent<Text> ();
 
-
-				//@@@@@@@@@@@@@@@@@@
-				// Best Check Point
-				//@@@@@@@@@@@@@@@@@@
-				/*
-				int bestIndex = tp.lastCheckPointIndex;
-				float bestDistance = Vector3.Distance (tp.trajectory.checkPoints [bestIndex].position, tp.target.transform.position);
-				int temp = Mathf.Min (bestIndex + 1, tp.trajectory.checkPoints.Count - 1);
-				float tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
-
-
-				while (temp < tp.trajectory.checkPoints.Count - 1 && tempDistance < bestDistance) {
-					bestIndex = temp;
-					bestDistance = tempDistance;
-					temp++;
-					tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
-				}
-
-				temp = (int)Mathf.Max (bestIndex - 1, 0);
-				tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
-				while (temp > 0 && tempDistance < bestDistance) {
-					bestIndex = temp;
-					bestDistance = tempDistance;
-					temp++;
-					tempDistance = Vector3.Distance (tp.trajectory.checkPoints [temp].position, tp.target.transform.position);
-				}
-				tp.lastCheckPointIndex = bestIndex; */
-				/*
-				Debug.Log ("Index : " + tp.lastCheckPointIndex);
-				Debug.Log ("Position " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].position);
-				Debug.Log ("Le G que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].acceleration.ToString());
-				Debug.Log ("La speed que tu devrais avoir : " + tp.trajectory.checkPoints [tp.lastCheckPointIndex].speed.ToString());
-				*/
-				//@@@@@@@@@@@@@@@@@@
-				// Sliders
-				//@@@@@@@@@@@@@@@@@@
-
-				/*Rigidbody rb = tp.target.GetComponent<Rigidbody> ();
-
-				Vector3 lastVelocity = rb.velocity;
-
-				float G = (lastVelocity - tp.lastVelocity).magnitude * 9.81f / Time.timeScale * 10f; // 10 pour la mise à l'echelle*/
-
 				tp.GQueue.Enqueue (gc.acceleration);
-				sliderG.value = getQueueMean (tp.GQueue);
-				affichageG.text =  sliderG.value.ToString ("F2")+" G";
+				sliderG.value = Mathf.Abs(getQueueMean (tp.GQueue));
+				affichageG.text =  Mathf.Abs(getQueueMean (tp.GQueue)).ToString ("F2")+" G";
 
 
 				dragSlider.value = Mathf.Sqrt (gc.drag);
@@ -147,16 +98,6 @@ public class TrackingPanelSystem : FSystem
 					c.a = 100;
 					GAlert.color = c;
 				}
-
-				/*if (Mathf.Abs (sliderOrientaion.value) > gc.RotAlertThreshold) {
-					Color c = Color.red;
-					c.a = tp.alphaAlertVal;
-					RotAlert.color = c;
-				} else {
-					Color c = Color.white;
-					c.a = 100;
-					RotAlert.color = c;
-				}*/
 
 				if (orientationSlider.value > 90 || orientationSlider.value < -90) {
 					Color c = Color.red;

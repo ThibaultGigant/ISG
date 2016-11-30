@@ -68,8 +68,6 @@ public class GameControllerSystem : FSystem
 			if(con.done){
 				break;
 			}
-
-			updateCurrentCheckPoint (con);
 			updateSpeedAndAcceleration (con);
 			updateGroundSpeed (con);
 			updateDrag (con);
@@ -78,7 +76,6 @@ public class GameControllerSystem : FSystem
 
 			CheckGFailure (con);
 			CheckDragFailure (con);
-			CheckDistanceFailure (con);
 			CheckCollision (con);
 
 			CheckTriggers (con);
@@ -112,17 +109,12 @@ public class GameControllerSystem : FSystem
 		// App.Load(Menu);
 	}
 
-
-	protected void updateCurrentCheckPoint (GameController con)
-	{
-		// TODO : A retirer ?
-	}
-
 	protected void updateSpeedAndAcceleration (GameController con)
 	{
 		Rigidbody rb = con.target.GetComponent<Rigidbody> ();
-		con.speedQueue.Enqueue (rb.velocity.magnitude * 3.6f * 9.81f);
-		con.accelerationQueue.Enqueue ((rb.velocity.magnitude * 3.6f * 9.81f - con.speed) );
+		float newSpeed = rb.velocity.magnitude * 3.6f * 9.81f;
+		con.speedQueue.Enqueue (newSpeed);
+		con.accelerationQueue.Enqueue ((newSpeed - con.speed) );
 		con.speed = getQueueMean (con.speedQueue);
 		con.acceleration = getQueueMean (con.accelerationQueue);
 
@@ -183,11 +175,6 @@ public class GameControllerSystem : FSystem
 	{
 		if (con.drag > con.DragFailThreshold)
 			Explode (con.target, con, "Too much drag !");
-	}
-
-	protected void CheckDistanceFailure (GameController con)
-	{
-		//TODO : A retirer ?
 	}
 
 	protected void CheckCollision (GameController con)
