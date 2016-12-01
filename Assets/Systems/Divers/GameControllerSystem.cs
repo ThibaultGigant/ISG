@@ -9,14 +9,14 @@ public class GameControllerSystem : FSystem
 
 	Family controllers = FamilyManager.getFamily (new AllOfComponents (typeof(GameController)));
 
-	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(InCollision3D)), new AnyOfTags("Orientable"));
+	Family collisions = FamilyManager.getFamily (new AllOfComponents (typeof(InCollision3D)));
 	Family explosives = FamilyManager.getFamily (new AnyOfTags ("Explosive"), new AllOfComponents (typeof(Rigidbody)));
 
-	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)));
+	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D), typeof(WayPoint)));
 
 
-	Family failure = FamilyManager.getFamily (new AnyOfTags("Failure"));
-	Family success = FamilyManager.getFamily (new AnyOfTags("Success"));
+	Family failure = FamilyManager.getFamily (new AnyOfTags("Failure"), new AllOfComponents(typeof(PopUpComponent)));
+	Family success = FamilyManager.getFamily (new AnyOfTags("Success"), new AllOfComponents(typeof(PopUpComponent)));
 
 	public static GameController controller;
 
@@ -182,10 +182,12 @@ public class GameControllerSystem : FSystem
 	{
 		foreach (GameObject go in collisions) {
 			foreach(GameObject collided in go.GetComponent<InCollision3D> ().Targets){
-				Rigidbody rb = collided.GetComponentInParent<Rigidbody> ();
-				if (rb.velocity.magnitude * 3.6 * 9.81f > con.MaxCollisionSpeed) {
-					Explode (collided, "You were going too fast for landing !   "+String.Format("{0:0.00}", con.speed));
+				if (collided.CompareTag ("Orientable")) {
+					Rigidbody rb = collided.GetComponentInParent<Rigidbody> ();
+					if (rb.velocity.magnitude * 3.6 * 9.81f > con.MaxCollisionSpeed) {
+						Explode (collided, "You were going too fast for landing !   " + String.Format ("{0:0.00}", con.speed));
 
+					}
 				}
 			}
 		}
