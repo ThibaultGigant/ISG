@@ -363,6 +363,10 @@ Prefab:
       propertyPath: consumption
       value: 0.07
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013724177932, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7, type: 2}
   m_IsPrefabParent: 0
@@ -441,10 +445,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fixedUpdateSystemDescriptions:
-  - _typeAssemblyQualifiedName: Level1Generator, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    _typeFullName: Level1Generator
-    _pause: 0
   - _typeAssemblyQualifiedName: MassSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     _typeFullName: MassSystem
@@ -1230,11 +1230,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 997416586}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1143917476 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000011213772856, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 63227478}
 --- !u!1 &1467581900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,7 +1401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ed1357b1dfc42a8aeb12def2e843d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toActivate: {fileID: 1143917476}
+  toActivate: {fileID: 0}
 --- !u!114 &1643915275
 MonoBehaviour:
   m_ObjectHideFlags: 0
