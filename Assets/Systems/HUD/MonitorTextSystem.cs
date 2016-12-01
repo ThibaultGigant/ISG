@@ -88,7 +88,7 @@ public class MonitorTextSystem : FSystem
 
 
 
-				string tex = "T : + " + (int)m.timer + "\n";
+				string tex = "T : + " + (int)m.timer + " (" + (int)Time.timeScale + "x)\n";
 				tex += "Speed : " + (int)getQueueMean (m.speedQueue) + " km/h" + "\n"; 
 				tex += "Grnd Speed : " + (int)getQueueMean (m.groundSpeedQueue) + " km/h\n";
 				//tex += "Acceleration : " + strG + " G" + "\n";
