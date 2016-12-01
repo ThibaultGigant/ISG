@@ -945,6 +945,21 @@ Prefab:
       propertyPath: dropBeforeIgnite.Array.data[0]
       value: 
       objectReference: {fileID: 288512913}
+    - target: {fileID: 114000010456577438, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: consumption
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013249201566, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: consumption
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010310871618, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7,
+        type: 2}
+      propertyPath: consumption
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b5c39ee7ba63491eac9cd0a8306b6e7, type: 2}
   m_IsPrefabParent: 0
