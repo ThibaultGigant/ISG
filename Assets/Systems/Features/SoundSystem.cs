@@ -39,7 +39,6 @@ public class SoundSystem : FSystem {
 				foreach (FireBaseScript f in go.GetComponent<Flames>().flames[0].GetComponentsInChildren<FireBaseScript>()) {
 					foreach (ParticleSystem p in f.ManualParticleSystems) {
 						if (p.startSize > 0 && p.isPlaying) {
-							Debug.Log (p.startSize);
 							flamesFlag = true;
 							break;
 						}
@@ -55,11 +54,8 @@ public class SoundSystem : FSystem {
 			}
 		}
 
-		Debug.Log ("son : " + sound.fireOn + " flames : " + flamesFlag);
-
 		if (flamesFlag && !sound.fireOn) {
 			sound.fireSound.Play ();
-			Debug.Log ("Je suis ici");
 			sound.fireOn = true;
 		} 
 		else if (flamesFlag == false) {

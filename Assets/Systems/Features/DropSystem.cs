@@ -66,6 +66,8 @@ public class DropSystem : FSystem
 		if (dropped.GetComponent<Rigidbody> () == null && dropped == father) {
 			GameObjectManager.addComponent<Rigidbody> (dropped);
 		}
+		foreach (Largable l in father.GetComponentsInChildren<Largable>())
+			l.toDrop = true;
 
 		// Mise à jour des target des components
 		dropped.GetComponent<Masse> ().target = father;
