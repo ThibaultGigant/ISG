@@ -17,6 +17,7 @@ TagManager:
   - Failure
   - Success
   - Trigger
+  - Attracteur
   layers:
   - Default
   - TransparentFX

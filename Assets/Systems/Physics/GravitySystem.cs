@@ -4,7 +4,7 @@ using FYFY;
 public class GravitySystem : FSystem {
 	// Récupération des familles sur lesquelles agit le système
 	private Family orbiteurs = FamilyManager.getFamily(new AllOfComponents(typeof(Rigidbody)));
-	private Family attracteurs = FamilyManager.getFamily(new AllOfComponents(typeof(Attracteur), typeof(Masse)));
+	private Family attracteurs = FamilyManager.getFamily(new AllOfComponents(typeof(Masse)), new AnyOfTags("Attracteur"));
 
 	// Constante gravitationnelle pour les calculs des forces
 	public static float GRAVITY_CNST = 6.67384e-11f;
