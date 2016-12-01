@@ -31,8 +31,6 @@ public class GameControllerSystem : FSystem
 			con.dragQueue = new LimitedQueue<float> (con.memory);
 			controller = con;
 		}
-
-
 	}
 
 	protected override void onPause (int currentFrame)
@@ -223,7 +221,7 @@ public class GameControllerSystem : FSystem
 			if (orientable) {
 				if (con.lastWayPoint + 1 == wp.id) {
 					if (con.speed > wp.maxSpeed) {
-						Failure (con, "You were going too fast. " + (int)con.speed);
+						Explode (con.target, "You were going too fast. " + (int)con.speed);
 					} else if (con.speed < wp.minSpeed) {
 						Failure (con, "You were going too slow. " + (int)con.speed);
 					} else {
