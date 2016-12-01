@@ -51,7 +51,6 @@ public class TrackingPanelSystem : FSystem
 
 				Image GAlert = go.transform.Find ("PanelG/Panel").GetComponent<Image> ();
 				Image DragAlert = go.transform.Find ("PanelDrag/Panel").GetComponent<Image> ();
-				Image orientationAlert = go.transform.Find ("PanelOrientation/Panel").GetComponent<Image> ();
 
 				Text affichageDegres = go.transform.Find ("PanelOrientation/Affichage/Text").GetComponent<Text> ();
 				Text affichageG = go.transform.Find ("PanelG/Affichage/Text").GetComponent<Text> ();
@@ -97,16 +96,6 @@ public class TrackingPanelSystem : FSystem
 					Color c = Color.white;
 					c.a = 100;
 					GAlert.color = c;
-				}
-
-				if (orientationSlider.value > 90 || orientationSlider.value < -90) {
-					Color c = Color.red;
-					c.a = tp.alphaAlertVal;
-					orientationAlert.color = c;
-				} else {
-					Color c = Color.white;
-					c.a = 100;
-					orientationAlert.color = c;
 				}
 
 				if (dragSlider.value > gc.DragAlertThreshold) {
