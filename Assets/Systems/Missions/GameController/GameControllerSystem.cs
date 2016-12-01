@@ -210,6 +210,7 @@ public class GameControllerSystem : FSystem
 			Triggered3D trig = wp.GetComponent<Triggered3D> ();
 			bool orientable = false;
 			foreach (GameObject test in trig.Targets) {
+				// Debug.Log ("Waypoint n°" + wp.id + " touched by : " + test);
 				if(test.CompareTag("Orientable") || test.CompareTag("Trigger"))
 				{
 					Debug.Log ("Waypoint n°" + wp.id + " triggered by : " + test);
