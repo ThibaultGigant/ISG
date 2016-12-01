@@ -7,7 +7,7 @@ public class FlamesSystem : FSystem
 	// Use this to update member variables when system pause.
 	// Advice: avoid to update your families inside this function.
 
-	private Family flames = FamilyManager.getFamily (new AllOfComponents (typeof(Flames)));
+	private Family flames = FamilyManager.getFamily (new AllOfComponents (typeof(Flames), typeof(Propulseur)));
 
 	protected override void onPause (int currentFrame)
 	{
