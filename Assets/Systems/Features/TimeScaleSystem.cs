@@ -14,21 +14,23 @@ public class TimeScaleSystem : FSystem
 			// Reset la timeScale
 			if (Input.GetKeyDown (KeyCode.R)) {
 				tsh.currentTimeScale = 0;
+				Time.timeScale = tsh.timeScales [tsh.currentTimeScale];
 			}
 			// Diminue d'un cran
 			if (tsh.currentTimeScale > 0) { 
 				if (Input.GetKeyDown (KeyCode.F)) {
 					tsh.currentTimeScale--;
+					Time.timeScale = tsh.timeScales [tsh.currentTimeScale];
 				}
 			}
 			// Augmente d'un cran
 			if (tsh.currentTimeScale < tsh.timeScales.Count - 1) { 
 				if (Input.GetKeyDown (KeyCode.G)) {
 					tsh.currentTimeScale++;
+					Time.timeScale = tsh.timeScales [tsh.currentTimeScale];
 				}
 			}
 
-			Time.timeScale = tsh.timeScales [tsh.currentTimeScale];
 		}
 	}
 }
