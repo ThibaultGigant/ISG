@@ -18,6 +18,7 @@ TagManager:
   - Success
   - Trigger
   - Attracteur
+  - DoNotDropNow
   layers:
   - Default
   - TransparentFX
