@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using FYFY;
 using DigitalRuby.PyroParticles;
+using System;
 
 public class FlamesSystem : FSystem
 {
@@ -40,19 +41,25 @@ public class FlamesSystem : FSystem
 	// Use to process your families.
 	protected override void onProcess (int familiesUpdateCount)
 	{
-		foreach (GameObject go in flames) {
-			Propulseur prop = go.GetComponent<Propulseur> ();
-			float sizeFactor = prop.currentThrust / prop.maxThrust;
-			Flames f = go.GetComponent<Flames> ();
 
-			foreach (GameObject f2 in f.flames) {
-				FireBaseScript fbs = f2.GetComponent<FireBaseScript> ();
-				FireBaseScript[] cfbs = f2.GetComponentsInChildren<FireBaseScript> ();
-				setFlameSize (fbs, sizeFactor, f.isOn);
-				foreach (FireBaseScript fbss in cfbs) {
-					setFlameSize (fbss, sizeFactor, f.isOn);
+		try {
+			foreach (GameObject go in flames) {
+				Propulseur prop = go.GetComponent<Propulseur> ();
+				float sizeFactor = prop.currentThrust / prop.maxThrust;
+				Flames f = go.GetComponent<Flames> ();
+
+				foreach (GameObject f2 in f.flames) {
+				
+					FireBaseScript fbs = f2.GetComponent<FireBaseScript> ();
+					FireBaseScript[] cfbs = f2.GetComponentsInChildren<FireBaseScript> ();
+					setFlameSize (fbs, sizeFactor, f.isOn);
+					foreach (FireBaseScript fbss in cfbs) {
+						setFlameSize (fbss, sizeFactor, f.isOn);
+					}
 				}
 			}
+		} catch (Exception e) {
+			
 		}
 	}
 }
