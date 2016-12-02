@@ -8,10 +8,12 @@ public class SoundSystem : FSystem {
 	Family flames = FamilyManager.getFamily (new AllOfComponents (typeof(Flames)));
 	Family largables = FamilyManager.getFamily (new AllOfComponents (typeof(Largable)));
 
-	GameObject temp;
+	SoundComponent sound;
 
 	public SoundSystem() {
-		temp = new GameObject ();
+		foreach (GameObject go in sounds)
+			sound = go.GetComponent<SoundComponent> ();
+
 	}
 
 	// Use this to update member variables when system pause. 
@@ -26,10 +28,6 @@ public class SoundSystem : FSystem {
 
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
-		foreach (GameObject go in sounds)
-			temp = go;
-
-		SoundComponent sound = temp.GetComponent<SoundComponent> ();
 
 		bool flamesFlag = false;
 		bool jettisonFlag = false;
