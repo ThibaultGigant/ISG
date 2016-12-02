@@ -5,6 +5,12 @@ public class TimeScaleSystem : FSystem
 {
 	private Family timeScale = FamilyManager.getFamily (new AllOfComponents (typeof(TimeScaleHandler)));
 
+	// Ne pas retirer, sinon loadScene ne place pas bien la caméra
+	public TimeScaleSystem()
+	{
+		Time.timeScale = 1;
+	}
+
 	// Use to process your families.
 	protected override void onProcess (int familiesUpdateCount)
 	{

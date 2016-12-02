@@ -21,6 +21,7 @@ public class PopOpClick : MonoBehaviour
 
 	public void Menu(){
 		Debug.Log ("Menu");
+		GameObjectManager.loadScene("Menu");
 	}
 
 	public void Replay(){

@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Final/Menu.unity
+  - enabled: 1
+    path: Assets/Scenes/Final/Level1Mercury.unity
+  - enabled: 1
+    path: Assets/Scenes/Final/Level2JupiterC.unity
+  - enabled: 1
+    path: Assets/Scenes/Final/Level3SaturnB.unity
+  - enabled: 1
+    path: Assets/Scenes/Final/Level4SpaceShuttle.unity
+  - enabled: 1
+    path: Assets/Scenes/Final/Level5SaturnV.unity
   - enabled: 0
     path: Assets/Scenes/LaunchPad.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TempScenes/Level1Mercury 1.unity
