@@ -19,6 +19,7 @@ TagManager:
   - Trigger
   - Attracteur
   - DoNotDropNow
+  - HelpWindow
   layers:
   - Default
   - TransparentFX

@@ -80,7 +80,6 @@ public class GameControllerSystem : FSystem
 			CheckTriggers (con);
 		}
 
-
 	}
 
 	void EndGame(GameController con){
