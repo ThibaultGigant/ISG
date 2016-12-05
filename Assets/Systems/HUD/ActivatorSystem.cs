@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ActivatorSystem : FSystem {
 
-	Family triggers = FamilyManager.getFamily (new AllOfComponents (typeof(Triggered3D)), new AllOfComponents (typeof(Activator)));
+	Family activators = FamilyManager.getFamily (new AllOfComponents (typeof(Activator)));
 	
 	protected override void onPause(int currentFrame) {
 	}
@@ -18,9 +18,10 @@ public class ActivatorSystem : FSystem {
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
 
-		foreach (GameObject go in triggers) {
+		foreach (GameObject go in activators) {
 			Activator ac = go.GetComponent<Activator> ();
-			ac.toActivate.GetComponent<Slider>().interactable = true;
+			if (PhysicsConstants.GetAltitude(ac.target.position) > ac.altitude)
+				ac.toActivate.GetComponent<Slider>().interactable = true;
 		}
 	
 	}
