@@ -210,7 +210,7 @@ public class GameControllerSystem : FSystem
 			bool orientable = false;
 			foreach (GameObject test in trig.Targets) {
 				// Debug.Log ("Waypoint n°" + wp.id + " touched by : " + test);
-				if(test.CompareTag("Orientable") || test.CompareTag("Trigger"))
+				if(test.CompareTag("Orientable") || test.CompareTag("Trigger") || test.CompareTag("DoNotDropNow"))
 				{
 					Debug.Log ("Waypoint n°" + wp.id + " triggered by : " + test);
 					orientable = true;
