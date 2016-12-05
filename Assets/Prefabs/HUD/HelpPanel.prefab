@@ -334,6 +334,8 @@ MonoBehaviour:
 
     - H/M/ESC : This help window
 
+    - Right Click + Move : Change camera orientation
+
 
     Meaning of switches and sliders :
 
@@ -956,7 +958,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.2249756, y: 159.6}
+  m_AnchoredPosition: {x: 13.449951, y: 160}
   m_SizeDelta: {x: 808, y: 572}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013783614028
